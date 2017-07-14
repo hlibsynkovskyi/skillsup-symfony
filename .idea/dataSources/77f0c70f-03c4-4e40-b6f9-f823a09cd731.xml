@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="symfony@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="symfony">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="crm"/>
+    <schema id="4" parent="1" name="homemates"/>
+    <schema id="5" parent="1" name="iloveenglish"/>
+    <schema id="6" parent="1" name="iloveenglish_2013"/>
+    <schema id="7" parent="1" name="iloveenglish_bak"/>
+    <schema id="8" parent="1" name="information_schema"/>
+    <schema id="9" parent="1" name="inportal_4sitters"/>
+    <schema id="10" parent="1" name="inportal_52"/>
+    <schema id="11" parent="1" name="inportal_53"/>
+    <schema id="12" parent="1" name="inportal_acc"/>
+    <schema id="13" parent="1" name="inportal_aei"/>
+    <schema id="14" parent="1" name="inportal_amalgamated"/>
+    <schema id="15" parent="1" name="inportal_artistview"/>
+    <schema id="16" parent="1" name="inportal_catalyst_portables"/>
+    <schema id="17" parent="1" name="inportal_concordia"/>
+    <schema id="18" parent="1" name="inportal_greatdane"/>
+    <schema id="19" parent="1" name="inportal_mbrico"/>
+    <schema id="20" parent="1" name="inportal_openspace"/>
+    <schema id="21" parent="1" name="inportal_pls"/>
+    <schema id="22" parent="1" name="inportal_radars"/>
+    <schema id="23" parent="1" name="inportal_rmpdc"/>
+    <schema id="24" parent="1" name="inportal_rpierp"/>
+    <schema id="25" parent="1" name="inportal_rpierpuat"/>
+    <schema id="26" parent="1" name="inportal_ryerson"/>
+    <schema id="27" parent="1" name="inportal_up"/>
+    <schema id="28" parent="1" name="inportal_viconline"/>
+    <schema id="29" parent="1" name="inportal_viconline2"/>
+    <schema id="30" parent="1" name="isoa"/>
+    <schema id="31" parent="1" name="lds"/>
+    <schema id="32" parent="1" name="lift-dnepr2"/>
+    <schema id="33" parent="1" name="liftdnepr"/>
+    <schema id="34" parent="1" name="mysql"/>
+    <schema id="35" parent="1" name="mywishdesk"/>
+    <schema id="36" parent="1" name="optimus"/>
+    <schema id="37" parent="1" name="performance_schema"/>
+    <schema id="38" parent="1" name="phabricator_almanac"/>
+    <schema id="39" parent="1" name="phabricator_application"/>
+    <schema id="40" parent="1" name="phabricator_audit"/>
+    <schema id="41" parent="1" name="phabricator_auth"/>
+    <schema id="42" parent="1" name="phabricator_badges"/>
+    <schema id="43" parent="1" name="phabricator_cache"/>
+    <schema id="44" parent="1" name="phabricator_calendar"/>
+    <schema id="45" parent="1" name="phabricator_chatlog"/>
+    <schema id="46" parent="1" name="phabricator_conduit"/>
+    <schema id="47" parent="1" name="phabricator_config"/>
+    <schema id="48" parent="1" name="phabricator_conpherence"/>
+    <schema id="49" parent="1" name="phabricator_countdown"/>
+    <schema id="50" parent="1" name="phabricator_daemon"/>
+    <schema id="51" parent="1" name="phabricator_dashboard"/>
+    <schema id="52" parent="1" name="phabricator_differential"/>
+    <schema id="53" parent="1" name="phabricator_diviner"/>
+    <schema id="54" parent="1" name="phabricator_doorkeeper"/>
+    <schema id="55" parent="1" name="phabricator_draft"/>
+    <schema id="56" parent="1" name="phabricator_drydock"/>
+    <schema id="57" parent="1" name="phabricator_fact"/>
+    <schema id="58" parent="1" name="phabricator_feed"/>
+    <schema id="59" parent="1" name="phabricator_file"/>
+    <schema id="60" parent="1" name="phabricator_flag"/>
+    <schema id="61" parent="1" name="phabricator_fund"/>
+    <schema id="62" parent="1" name="phabricator_harbormaster"/>
+    <schema id="63" parent="1" name="phabricator_herald"/>
+    <schema id="64" parent="1" name="phabricator_legalpad"/>
+    <schema id="65" parent="1" name="phabricator_maniphest"/>
+    <schema id="66" parent="1" name="phabricator_metamta"/>
+    <schema id="67" parent="1" name="phabricator_meta_data"/>
+    <schema id="68" parent="1" name="phabricator_multimeter"/>
+    <schema id="69" parent="1" name="phabricator_nuance"/>
+    <schema id="70" parent="1" name="phabricator_oauth_server"/>
+    <schema id="71" parent="1" name="phabricator_owners"/>
+    <schema id="72" parent="1" name="phabricator_packages"/>
+    <schema id="73" parent="1" name="phabricator_passphrase"/>
+    <schema id="74" parent="1" name="phabricator_pastebin"/>
+    <schema id="75" parent="1" name="phabricator_phame"/>
+    <schema id="76" parent="1" name="phabricator_phlux"/>
+    <schema id="77" parent="1" name="phabricator_pholio"/>
+    <schema id="78" parent="1" name="phabricator_phortune"/>
+    <schema id="79" parent="1" name="phabricator_phragment"/>
+    <schema id="80" parent="1" name="phabricator_phrequent"/>
+    <schema id="81" parent="1" name="phabricator_phriction"/>
+    <schema id="82" parent="1" name="phabricator_phurl"/>
+    <schema id="83" parent="1" name="phabricator_policy"/>
+    <schema id="84" parent="1" name="phabricator_ponder"/>
+    <schema id="85" parent="1" name="phabricator_project"/>
+    <schema id="86" parent="1" name="phabricator_releeph"/>
+    <schema id="87" parent="1" name="phabricator_repository"/>
+    <schema id="88" parent="1" name="phabricator_search"/>
+    <schema id="89" parent="1" name="phabricator_slowvote"/>
+    <schema id="90" parent="1" name="phabricator_spaces"/>
+    <schema id="91" parent="1" name="phabricator_system"/>
+    <schema id="92" parent="1" name="phabricator_token"/>
+    <schema id="93" parent="1" name="phabricator_user"/>
+    <schema id="94" parent="1" name="phabricator_worker"/>
+    <schema id="95" parent="1" name="phabricator_xhpast"/>
+    <schema id="96" parent="1" name="phabricator_xhprof"/>
+    <schema id="97" parent="1" name="phpci"/>
+    <schema id="98" parent="1" name="phpmyadmin"/>
+    <schema id="99" parent="1" name="softinform"/>
+    <schema id="100" parent="1" name="softinform_main"/>
+    <schema id="101" parent="1" name="sys"/>
+    <table id="102" parent="2" name="products"/>
+    <table id="103" parent="2" name="users"/>
+    <column id="104" parent="102" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="105" parent="102" name="name">
+      <Position>2</Position>
+      <DataType>varchar(250)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="106" parent="102" name="price">
+      <Position>3</Position>
+      <DataType>decimal(10,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="107" parent="102" name="photo">
+      <Position>4</Position>
+      <DataType>varchar(250)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="108" parent="102" name="sku">
+      <Position>5</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="109" parent="102" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="110" parent="103" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="111" parent="103" name="username">
+      <Position>2</Position>
+      <DataType>varchar(180)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="112" parent="103" name="username_canonical">
+      <Position>3</Position>
+      <DataType>varchar(180)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="113" parent="103" name="email">
+      <Position>4</Position>
+      <DataType>varchar(180)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="114" parent="103" name="email_canonical">
+      <Position>5</Position>
+      <DataType>varchar(180)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="115" parent="103" name="enabled">
+      <Position>6</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="116" parent="103" name="salt">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="117" parent="103" name="password">
+      <Position>8</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="118" parent="103" name="last_login">
+      <Position>9</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="119" parent="103" name="confirmation_token">
+      <Position>10</Position>
+      <DataType>varchar(180)|0</DataType>
+    </column>
+    <column id="120" parent="103" name="password_requested_at">
+      <Position>11</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="121" parent="103" name="roles">
+      <Position>12</Position>
+      <Comment>(DC2Type:array)</Comment>
+      <DataType>longtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="122" parent="103" name="first_name">
+      <Position>13</Position>
+      <DataType>varchar(250)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="123" parent="103" name="last_name">
+      <Position>14</Position>
+      <DataType>varchar(250)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="124" parent="103" name="UNIQ_1483A5E992FC23A8">
+      <ColNames>username_canonical</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="125" parent="103" name="UNIQ_1483A5E9A0D96FBF">
+      <ColNames>email_canonical</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="126" parent="103" name="UNIQ_1483A5E9C05FB297">
+      <ColNames>confirmation_token</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="127" parent="103" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="128" parent="103" name="UNIQ_1483A5E992FC23A8">
+      <ColNames>username_canonical</ColNames>
+      <UnderlyingIndexName>UNIQ_1483A5E992FC23A8</UnderlyingIndexName>
+    </key>
+    <key id="129" parent="103" name="UNIQ_1483A5E9A0D96FBF">
+      <ColNames>email_canonical</ColNames>
+      <UnderlyingIndexName>UNIQ_1483A5E9A0D96FBF</UnderlyingIndexName>
+    </key>
+    <key id="130" parent="103" name="UNIQ_1483A5E9C05FB297">
+      <ColNames>confirmation_token</ColNames>
+      <UnderlyingIndexName>UNIQ_1483A5E9C05FB297</UnderlyingIndexName>
+    </key>
+  </database-model>
+</dataSource>
