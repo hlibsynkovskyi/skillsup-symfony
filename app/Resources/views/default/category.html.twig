@@ -1,7 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Категория: {{ category.name }}</h1>
+    <div id="category-header">
+        <div class="row">
+            <div class="container">
+                <div class="col-2">
+                    <div class="category-image">
+                        <img src="{{ category.photo }}" alt="Phone" class="img-responsive">
+                    </div><!-- End .category-image -->
+
+                </div><!-- End .col-2 -->
+
+                <div class="col-2 last">
+                    <div class="category-title">
+                        <h2>{{ category.name }}</h2>
+                        <p>{{ category.description }}</p>
+                        <!--a href="#" class="btn btn-custom">LEARN MORE</a-->
+                    </div><!-- End .category-title -->
+                </div><!-- End .col-2 -->
+            </div><!-- End .container -->
+        </div><!-- End .row -->
+    </div><!-- End #category-header -->
 
     <h2>Подкатегории</h2>
 
