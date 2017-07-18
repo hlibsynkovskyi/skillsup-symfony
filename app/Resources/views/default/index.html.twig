@@ -3,10 +3,12 @@
 {% block body %}
     {% for category in categories %}
         <p>
-            {{ category.name }}
-            {% if category.photo %}
-                <img src="{{ category.photo }}" width="300" height="200">
-            {% endif %}
+            <a href="{{ path('category', {id: category.id}) }}">
+                {{ category.name }}
+                {% if category.photo %}
+                    <img src="{{ category.photo }}" width="300" height="200">
+                {% endif %}
+            </a>
         </p>
     {% endfor %}
 
