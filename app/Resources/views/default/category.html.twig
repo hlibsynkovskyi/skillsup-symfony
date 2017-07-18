@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Категория: {{ category.name }}</h1>
+
+    <h2>Подкатегории</h2>
+
+    {% for subcategory in category.subcategories %}
+        <p>Категория: {{ subcategory.name }}
+            {% if subcategory.photo %}
+                <img src="{{ subcategory.photo }}">
+            {% endif %}
+        </p>
+    {% endfor %}
+
+    {% for product in category.products %}
+        <p>Продукт: {{ product.name }} - {{ product.price }}
+            {% if product.photo %}
+                <img src="{{ product.photo }}">
+            {% endif %}
+        </p>
+    {% endfor %}
+{% endblock %}

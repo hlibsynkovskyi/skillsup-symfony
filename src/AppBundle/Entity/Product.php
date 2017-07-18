@@ -50,6 +50,13 @@ class Product
 	 */
 	protected $sku;
 
+	/**
+	 * @var Category
+	 *
+	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="products")
+	 * @ORM\JoinColumn(name="category_id", onDelete="CASCADE")
+	 */
+	protected $category;
 
     /**
      * Get id
@@ -155,5 +162,29 @@ class Product
     public function getSku()
     {
         return $this->sku;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\Category $category
+     *
+     * @return Product
+     */
+    public function setCategory(\AppBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }
