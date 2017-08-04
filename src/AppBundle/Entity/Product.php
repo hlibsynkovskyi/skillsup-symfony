@@ -58,7 +58,27 @@ class Product
 	 */
 	protected $category;
 
-    /**
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(type="boolean", nullable=true)
+	 */
+	protected $isNew;
+
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(type="integer", nullable=true)
+	 */
+	protected $discount;
+
+	public function __construct()
+	{
+		$this->isNew = true;
+		$this->discount = 0;
+	}
+
+	/**
      * Get id
      *
      * @return integer
@@ -78,6 +98,7 @@ class Product
     public function setName($name)
     {
         $this->name = $name;
+        $this->color = 'blue';
 
         return $this;
     }
@@ -187,4 +208,67 @@ class Product
     {
         return $this->category;
     }
+
+    /**
+     * Set isNew
+     *
+     * @param boolean $isNew
+     *
+     * @return Product
+     */
+    public function setIsNew($isNew)
+    {
+        $this->isNew = $isNew;
+
+        return $this;
+    }
+
+    /**
+     * Get isNew
+     *
+     * @return boolean
+     */
+    public function getIsNew()
+    {
+        return $this->isNew;
+    }
+
+    /**
+     * Set discount
+     *
+     * @param integer $discount
+     *
+     * @return Product
+     */
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
+
+        return $this;
+    }
+
+    /**
+     * Get discount
+     *
+     * @return integer
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+	/**
+	 * Get discounted price.
+	 *
+	 * @return float
+	 */
+    public function getDiscountedPrice()
+	{
+		if ( !$this->discount ) {
+			return $this->price;
+		}
+
+		return $this->price - round($this->price * $this->discount / 100, 2);
+	}
+
 }

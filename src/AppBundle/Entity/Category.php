@@ -249,4 +249,23 @@ class Category
     {
         return $this->products;
     }
+
+	/**
+	 * Returns parents in reverse order for breadcrumbs
+	 *
+	 * @return Category[]
+	 */
+    public function getParents()
+	{
+		$parents = [];
+		$parent = $this->getParent();
+
+		while ( $parent ) {
+			$parents[] = $parent;
+			$parent = $parent->getParent();
+		}
+
+		return array_reverse($parents);
+	}
+
 }

@@ -12,11 +12,5 @@
         </p>
     {% endfor %}
 
-    {% for product in products %}
-        <p>Продукт: {{ product.name }} - {{ product.price }}
-            {% if product.photo %}
-                <img src="{{ product.photo }}">
-            {% endif %}
-        </p>
-    {% endfor %}
+    {% include 'elements/products.html.twig' with {'products': products} %}
 {% endblock %}

@@ -50,18 +50,4 @@ class DefaultController extends Controller
         ]);
     }
 
-	/**
-	 * @Route("/category/{id}", name="category")
-	 *
-	 * @param Category $category
-	 *
-	 * @return Response
-	 */
-    public function categoryAction(Category $category)
-	{
-		return $this->render('default/category.html.twig', [
-			'category' => $category,
-		]);
-	}
-
 }
