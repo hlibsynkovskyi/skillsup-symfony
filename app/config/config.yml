@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['ru'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -21,7 +21,7 @@ framework:
     #serializer: { enable_annotations: true }
     templating:
         engines: ['twig']
-    default_locale: '%locale%'
+    default_locale: 'ru'
     trusted_hosts: ~
     session:
         # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
@@ -75,3 +75,10 @@ fos_user:
     from_email:
         address: "noreply@noemail.com"
         sender_name: "nobody"
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]

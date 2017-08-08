@@ -268,4 +268,9 @@ class Category
 		return array_reverse($parents);
 	}
 
+	public function __toString()
+	{
+		return $this->name;
+	}
+
 }
