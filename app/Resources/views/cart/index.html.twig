@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table>
+        <tr>
+            <th>Товар</th>
+            <th>Цена</th>
+            <th>Кол-во</th>
+            <th>Стоимость</th>
+        </tr>
+
+        {% for item in cart.items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.product.discountedPrice }}</td>
+                <td>{{ item.count }}</td>
+                <td>{{ item.count * item.product.discountedPrice }}</td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <th colspan="2">Всего</th>
+            <th>{{ cart.count }}</th>
+            <th>{{ cart.cost }}</th>
+        </tr>
+    </table>
+{% endblock %}

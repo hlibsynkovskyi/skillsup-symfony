@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -72,10 +73,18 @@ class Product
 	 */
 	protected $discount;
 
+	/**
+	 * @var CartItem[]
+	 *
+	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\CartItem", mappedBy="product")
+	 */
+	protected $cartItems;
+
 	public function __construct()
 	{
 		$this->isNew = true;
 		$this->discount = 0;
+		$this->cartItems = new ArrayCollection();
 	}
 
 	/**
@@ -271,4 +280,38 @@ class Product
 		return $this->price - round($this->price * $this->discount / 100, 2);
 	}
 
+
+    /**
+     * Add cartItem
+     *
+     * @param \AppBundle\Entity\CartItem $cartItem
+     *
+     * @return Product
+     */
+    public function addCartItem(\AppBundle\Entity\CartItem $cartItem)
+    {
+        $this->cartItems[] = $cartItem;
+
+        return $this;
+    }
+
+    /**
+     * Remove cartItem
+     *
+     * @param \AppBundle\Entity\CartItem $cartItem
+     */
+    public function removeCartItem(\AppBundle\Entity\CartItem $cartItem)
+    {
+        $this->cartItems->removeElement($cartItem);
+    }
+
+    /**
+     * Get cartItems
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCartItems()
+    {
+        return $this->cartItems;
+    }
 }

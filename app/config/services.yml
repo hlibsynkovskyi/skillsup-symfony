@@ -47,3 +47,8 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Продукты }
         public: true
+
+    app.carts:
+        class: AppBundle\Service\CartService
+        arguments: ['@doctrine', '@session']
+        public: true

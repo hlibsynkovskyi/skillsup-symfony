@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,12 +32,20 @@ class User extends BaseUser
 	 */
 	protected $lastName;
 
+	/**
+	 * @var Cart[]
+	 *
+	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\Cart", mappedBy="user")
+	 */
+	protected $carts;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->firstName = '';
         $this->lastName = '';
+        $this->carts = new ArrayCollection();
     }
 
 
@@ -86,5 +95,39 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * Add cart
+     *
+     * @param \AppBundle\Entity\Cart $cart
+     *
+     * @return User
+     */
+    public function addCart(\AppBundle\Entity\Cart $cart)
+    {
+        $this->carts[] = $cart;
+
+        return $this;
+    }
+
+    /**
+     * Remove cart
+     *
+     * @param \AppBundle\Entity\Cart $cart
+     */
+    public function removeCart(\AppBundle\Entity\Cart $cart)
+    {
+        $this->carts->removeElement($cart);
+    }
+
+    /**
+     * Get carts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCarts()
+    {
+        return $this->carts;
     }
 }
