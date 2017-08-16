@@ -79,4 +79,25 @@ class CartService
 		return $cart;
 	}
 
+	public function removeItemFromCart(CartItem $item)
+	{
+		// Получили корзину
+		$cart = $item->getCart();
+
+		// Обновляем общее кол-во товаров в корзине
+		$cart->setCount($cart->getCount() - $item->getCount());
+
+		// Обновляем общую стоимость товаров в корзине
+		$cart->setCost($cart->getCost() - $item->getProduct()->getDiscountedPrice() * $item->getCount());
+
+		// Помечаем корзину для сохранения в БД
+		$this->manager->persist($cart);
+
+		// Помечаем элемент корзины для удаления в БД
+		$this->manager->remove($item);
+
+		// Применяем изменения в БД
+		$this->manager->flush();
+	}
+
 }

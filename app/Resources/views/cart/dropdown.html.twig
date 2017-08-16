@@ -7,38 +7,24 @@
     <div class="dropdown-menu dropdown-cart-menu pull-right clearfix" role="menu">
         <p class="dropdown-cart-description">Recently added item(s).</p>
         <ul class="dropdown-cart-product-list">
-            <li class="item clearfix">
-                <a href="#" title="Delete item" class="delete-item"><i class="fa fa-times"></i></a>
-                <a href="#" title="Edit item" class="edit-item"><i class="fa fa-pencil"></i></a>
-                <figure>
-                    <a href="product.html"><img src="{{ asset('assets/images/products/thumbnails/item12.jpg') }}" alt="phone 4"></a>
-                </figure>
-                <div class="dropdown-cart-details">
-                    <p class="item-name">
-                        <a href="product.html">Cam Optia AF Webcam </a>
-                    </p>
-                    <p>
-                        1x
-                        <span class="item-price">$499</span>
-                    </p>
-                </div><!-- End .dropdown-cart-details -->
-            </li>
-            <li class="item clearfix">
-                <a href="#" title="Delete item" class="delete-item"><i class="fa fa-times"></i></a>
-                <a href="#" title="Edit item" class="edit-item"><i class="fa fa-pencil"></i></a>
-                <figure>
-                    <a href="product.html"><img src="{{ asset('assets/images/products/thumbnails/item13.jpg') }}" alt="phone 2"></a>
-                </figure>
-                <div class="dropdown-cart-details">
-                    <p class="item-name">
-                        <a href="product.html">Iphone Case Cover Original</a>
-                    </p>
-                    <p>
-                        1x
-                        <span class="item-price">$499<span class="sub-price">.99</span></span>
-                    </p>
-                </div><!-- End .dropdown-cart-details -->
-            </li>
+            {% for item in cart.items %}
+                <li class="item clearfix">
+                    <a href="{{ path('remove_from_cart', {id: item.id}) }}" title="Delete item" class="delete-item js-cart-btn"><i class="fa fa-times"></i></a>
+                    <a href="#" title="Edit item" class="edit-item"><i class="fa fa-pencil"></i></a>
+                    <figure>
+                        <a href="{{ path('product', {id: item.product.id}) }}"><img src="{{ asset('assets/images/products/thumbnails/item12.jpg') }}" alt="{{ item.product.name }}"></a>
+                    </figure>
+                    <div class="dropdown-cart-details">
+                        <p class="item-name">
+                            <a href="{{ path('product', {id: item.product.id}) }}">{{ item.product.name }}</a>
+                        </p>
+                        <p>
+                            {{ item.count }}x
+                            <span class="item-price">{{ item.product.discountedPrice }}</span>
+                        </p>
+                    </div><!-- End .dropdown-cart-details -->
+                </li>
+            {% endfor %}
         </ul>
 
         <ul class="dropdown-cart-total">
