@@ -53,7 +53,7 @@ class CartService
 		$this->manager->persist($cartItem);
 
 		$cart->setCount($cart->getCount() + $count);
-		$cart->setCost($cart->getCost() + $product->getDiscountedPrice() * $count);
+		$cart->setCost($cart->getCost() + $cartItem->getCost());
 		$this->manager->persist($cart);
 
 		$this->manager->flush();
@@ -88,13 +88,43 @@ class CartService
 		$cart->setCount($cart->getCount() - $item->getCount());
 
 		// Обновляем общую стоимость товаров в корзине
-		$cart->setCost($cart->getCost() - $item->getProduct()->getDiscountedPrice() * $item->getCount());
+		$cart->setCost($cart->getCost() - $item->getCost());
 
 		// Помечаем корзину для сохранения в БД
 		$this->manager->persist($cart);
 
 		// Помечаем элемент корзины для удаления в БД
 		$this->manager->remove($item);
+
+		// Применяем изменения в БД
+		$this->manager->flush();
+	}
+
+	/**
+	 * Изменение кол-ва товара в корзине
+	 *
+	 * @param CartItem $item  Элемент корзины
+	 * @param integer  $count Новое количество
+	 */
+	public function setItemCount(CartItem $item, $count)
+	{
+		// Получили корзину
+		$cart = $item->getCart();
+
+		// Вычисляем сколько товаров в корзине было бы без текущего
+		$cart->setCount($cart->getCount() - $item->getCount());
+
+		// Обновляем общую стоимость товаров в корзине
+		$cart->setCost($cart->getCost() - $item->getCost());
+
+		// Устанавливаем новое кол-во товара
+		$item->setCount($count);
+
+		// Добавляем новое кол-во товара в корзину
+		$cart->setCount($cart->getCount() + $count);
+
+		// Добавляем стоимость товара
+		$cart->setCost($cart->getCost() + $item->getCost());
 
 		// Применяем изменения в БД
 		$this->manager->flush();

@@ -113,7 +113,7 @@ class Cart
     /**
      * Get cost
      *
-     * @return string
+     * @return float
      */
     public function getCost()
     {

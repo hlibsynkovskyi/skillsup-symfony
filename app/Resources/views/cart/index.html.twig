@@ -1,27 +1,189 @@
 {% extends 'base.html.twig' %}
+    {% block body %}
 
-{% block body %}
-    <table>
-        <tr>
-            <th>Товар</th>
-            <th>Цена</th>
-            <th>Кол-во</th>
-            <th>Стоимость</th>
-        </tr>
+    <section id="content">
+        <div id="breadcrumb-container">
+            <div class="container">
+                <ul class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active">Shopping Cart</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <header class="content-title">
+                        <h1 class="title">Shopping Cart</h1>
+                        <p class="title-desc">Just this week, you can use the free premium delivery.</p>
+                    </header>
+                    <div class="xs-margin"></div><!-- space -->
+                    <div class="row">
 
-        {% for item in cart.items %}
-            <tr>
-                <td>{{ item.product.name }}</td>
-                <td>{{ item.product.discountedPrice }}</td>
-                <td>{{ item.count }}</td>
-                <td>{{ item.count * item.product.discountedPrice }}</td>
-            </tr>
-        {% endfor %}
+                        <div class="col-md-12 table-responsive">
 
-        <tr>
-            <th colspan="2">Всего</th>
-            <th>{{ cart.count }}</th>
-            <th>{{ cart.cost }}</th>
-        </tr>
-    </table>
-{% endblock %}
+
+
+                            <table class="table cart-table">
+                                <thead>
+                                <tr>
+                                    <th class="table-title">Product Name</th>
+                                    <th class="table-title">Product Code</th>
+                                    <th class="table-title">Unit Price</th>
+                                    <th class="table-title">Quantity</th>
+                                    <th class="table-title">SubTotal</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for item in cart.items %}
+                                <tr>
+                                    <td class="item-name-col">
+                                        <figure>
+                                            <a href={{ path('product', {'id':item.product.id}) }}><img src={{ item.product.photo }} alt="Lowlands Lace Blouse"></a>
+                                        </figure>
+                                        <header class="item-name"><a href="#">{{ item.product.name }}</a></header>
+                                        <ul>
+                                            <li>Color: White</li>
+                                            <li>Size: SM</li>
+                                        </ul>
+                                    </td>
+                                    <td class="item-code">MP125984154</td>
+                                    <td class="item-price-col"><span class="item-price-special">{{ item.product.discountedPrice }}</span></td>
+                                    <td>
+                                        <div class="custom-quantity-input">
+                                            <input type="text" name="quantity" class="js-item-count" data-update-url="{{ path('set_item_count', {'id': item.id}) }}" value="{{ item.count }}">
+                                            <a href="#" onclick="return false;" class="quantity-btn quantity-input-up"><i class="fa fa-angle-up"></i></a>
+                                            <a href="#" onclick="return false;" class="quantity-btn quantity-input-down"><i class="fa fa-angle-down"></i></a>
+                                        </div>
+                                    </td>
+                                    <td class="item-total-col"><span class="item-price-special js-item-cost">{{ item.cost }}</span>
+                                        <a href="#" class="close-button"></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+
+
+                        </div><!-- End .col-md-12 -->
+
+                    </div><!-- End .row -->
+                    <div class="lg-margin"></div><!-- End .space -->
+
+                    <div class="row">
+                        <div class="col-md-8 col-sm-12 col-xs-12 lg-margin">
+
+                            <div class="tab-container left clearfix">
+                                <ul class="nav-tabs">
+                                    <li class="active"><a href="#shipping" data-toggle="tab">Shipping &amp; Taxes</a></li>
+                                    <li><a href="#discount" data-toggle="tab">Discount Code</a></li>
+                                    <li><a href="#gift" data-toggle="tab">Gift voucher </a></li>
+
+                                </ul>
+                                <div class="tab-content clearfix">
+                                    <div class="tab-pane active" id="shipping">
+
+                                        <form action="#" id="shipping-form">
+                                            <p class="shipping-desc">Enter your destination to get a shipping estimate.</p>
+                                            <div class="form-group">
+                                                <label for="select-country" class="control-label">Country&#42;</label>
+                                                <div class="input-container normal-selectbox">
+                                                    <select id="select-country" name="select-country" class="selectbox">
+                                                        <option  value="Japan">Japan</option>
+                                                        <option  value="Brazil">Brazil</option>
+                                                        <option  value="France">France</option>
+                                                        <option  value="Italy">Italy</option>
+                                                        <option  value="Spain">Spain</option>
+                                                    </select>
+                                                </div><!-- End .select-container -->
+                                            </div><!-- End .form-group -->
+                                            <div class="xss-margin"></div>
+                                            <div class="form-group">
+                                                <label for="select-state" class="control-label">Regison/State&#42;</label>
+                                                <div class="input-container normal-selectbox">
+                                                    <select id="select-state" name="select-state" class="selectbox">
+                                                        <option  value="California">California</option>
+                                                        <option  value="Texas">Texas</option>
+                                                        <option  value="NewYork">NewYork</option>
+                                                        <option  value="Narnia">Narnia</option>
+                                                        <option  value="Jumanji">Jumanji</option>
+                                                    </select>
+                                                </div><!-- End .select-container -->
+                                            </div><!-- End .form-group -->
+                                            <div class="xss-margin"></div>
+                                            <div class="form-group">
+                                                <label for="select-country" class="control-label"  >Post Code&#42;</label>
+                                                <div class="input-container">
+                                                    <input type="text" required class="form-control" placeholder="Your fax">
+                                                </div>
+                                            </div><!-- End .form-group -->
+                                            <div class="xss-margin"></div>
+                                            <p class="text-right">
+                                                <input type="submit" class="btn btn-custom-2" value="GET QUOTES">
+                                            </p>
+                                        </form>
+
+                                    </div><!-- End .tab-pane -->
+
+                                    <div class="tab-pane" id="discount">
+                                        <p>Enter your discount coupon code here.</p>
+                                        <form action="#">
+                                            <div class="input-group">
+                                                <input type="text" required class="form-control" placeholder="Coupon code">
+
+                                            </div><!-- End .input-group -->
+                                            <input type="submit" class="btn btn-custom-2" value="APPLY COUPON">
+                                        </form>
+                                    </div><!-- End .tab-pane -->
+
+                                    <div class="tab-pane" id="gift">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi dignissimos nostrum debitis optio molestiae in quam dicta labore obcaecati ullam necessitatibus animi deleniti minima dolor suscipit nobis est excepturi inventore.</p>
+                                    </div><!-- End .tab-pane -->
+
+                                </div><!-- End .tab-content -->
+                            </div><!-- End .tab-container -->
+
+                        </div><!-- End .col-md-8 -->
+
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+
+                            <table class="table total-table">
+                                <tbody>
+                                <tr>
+                                    <td class="total-table-title">Общее количество:</td>
+                                    <td class="js-cart-count">{{ cart.count }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="total-table-title">Subtotal:</td>
+                                    <td class="js-cart-cost">{{ cart.cost }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="total-table-title">Shipping:</td>
+                                    <td>$6.00</td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td>Total:</td>
+                                    <td class="js-cart-cost">{{ cart.cost }}</td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            <div class="md-margin"></div><!-- End .space -->
+                            <a href="#" class="btn btn-custom-2">CONTINUE SHOPPING</a>
+                            <a href="#" class="btn btn-custom">CHECKOUT</a>
+                        </div><!-- End .col-md-4 -->
+                    </div><!-- End .row -->
+                    <div class="md-margin2x"></div><!-- Space -->
+
+
+
+                </div><!-- End .col-md-12 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+
+    </section><!-- End #content -->
+
+    {% endblock %}

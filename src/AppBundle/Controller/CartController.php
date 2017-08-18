@@ -6,6 +6,8 @@ use AppBundle\Entity\CartItem;
 use AppBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CartController extends Controller
@@ -61,6 +63,33 @@ class CartController extends Controller
 		$this->get('app.carts')->removeItemFromCart($item);
 
 		return $this->redirectToRoute('cart_dropdown');
+	}
+
+	/**
+	 * @Route("/set-item-count/{id}", name="set_item_count")
+	 *
+	 * @param CartItem $item
+	 * @param Request  $request
+	 *
+	 * @return Response
+	 */
+	public function setItemCountAction(CartItem $item, Request $request)
+	{
+		$count = intval($request->request->get('count'));
+
+		if ( $count <= 0 ) {
+			throw new \LogicException('Неверное количество');
+		}
+
+		$this->get('app.carts')->setItemCount($item, $count);
+
+		$result = [
+			'itemCost' => $item->getCost(),
+			'cartCost' => $item->getCart()->getCost(),
+			'cartCount' => $item->getCart()->getCount(),
+		];
+
+		return new JsonResponse($result);
 	}
 
 }
