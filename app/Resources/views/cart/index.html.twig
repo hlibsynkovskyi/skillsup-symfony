@@ -52,7 +52,7 @@
                                     <td class="item-price-col"><span class="item-price-special">{{ item.product.discountedPrice }}</span></td>
                                     <td>
                                         <div class="custom-quantity-input">
-                                            <input type="text" name="quantity" class="js-item-count" data-update-url="{{ path('set_item_count', {'id': item.id}) }}" value="{{ item.count }}">
+                                            <input type="text" name="quantity" class="js-item-count" data-update-url="{{ path('set_item_count', {'id': item.id}) }}" data-original-value="{{ item.count }}" value="{{ item.count }}">
                                             <a href="#" onclick="return false;" class="quantity-btn quantity-input-up"><i class="fa fa-angle-up"></i></a>
                                             <a href="#" onclick="return false;" class="quantity-btn quantity-input-down"><i class="fa fa-angle-down"></i></a>
                                         </div>
@@ -166,7 +166,7 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td>Total:</td>
+                                    <td>Всего:</td>
                                     <td class="js-cart-cost">{{ cart.cost }}</td>
                                 </tr>
                                 </tfoot>
