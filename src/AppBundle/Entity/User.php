@@ -39,6 +39,13 @@ class User extends BaseUser
 	 */
 	protected $carts;
 
+	/**
+	 * @var Order[]
+	 *
+	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\Order", mappedBy="user")
+	 */
+	protected $orders;
+
     public function __construct()
     {
         parent::__construct();
@@ -46,6 +53,7 @@ class User extends BaseUser
         $this->firstName = '';
         $this->lastName = '';
         $this->carts = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
 
@@ -129,5 +137,39 @@ class User extends BaseUser
     public function getCarts()
     {
         return $this->carts;
+    }
+
+    /**
+     * Add order
+     *
+     * @param \AppBundle\Entity\Order $order
+     *
+     * @return User
+     */
+    public function addOrder(\AppBundle\Entity\Order $order)
+    {
+        $this->orders[] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Remove order
+     *
+     * @param \AppBundle\Entity\Order $order
+     */
+    public function removeOrder(\AppBundle\Entity\Order $order)
+    {
+        $this->orders->removeElement($order);
+    }
+
+    /**
+     * Get orders
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrders()
+    {
+        return $this->orders;
     }
 }

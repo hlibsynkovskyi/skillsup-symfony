@@ -4,6 +4,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Cart;
 use AppBundle\Entity\CartItem;
+use AppBundle\Entity\Order;
 use AppBundle\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
@@ -128,6 +129,13 @@ class CartService
 
 		// Применяем изменения в БД
 		$this->manager->flush();
+	}
+
+	public function saveOrder(Order $order)
+	{
+		$this->manager->persist($order);
+		$this->manager->flush();
+		$this->session->remove('cart_id');
 	}
 
 }

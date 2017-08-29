@@ -53,6 +53,13 @@ class Cart
 	protected $items;
 
 	/**
+	 * @var Order
+	 *
+	 * @ORM\OneToOne(targetEntity="AppBundle\Entity\Order", mappedBy="cart")
+	 */
+	protected $order;
+
+	/**
 	 * Constructor
 	 */
 	public function __construct()
@@ -176,5 +183,29 @@ class Cart
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * Set order
+     *
+     * @param \AppBundle\Entity\Order $order
+     *
+     * @return Cart
+     */
+    public function setOrder(\AppBundle\Entity\Order $order = null)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return \AppBundle\Entity\Order
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }
