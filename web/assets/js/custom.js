@@ -53,10 +53,12 @@ $(function() {
                for (var index in data.data[0].Addresses) {
                    var address = data.data[0].Addresses[index];
 
-                   items.push({
-                       id: address.Ref,
-                       text: address.MainDescription
-                   });
+                   if (address.Warehouses !== 0) {
+                       items.push({
+                           id: address.Ref,
+                           text: address.MainDescription
+                       });
+                   }
                }
 
                return {
