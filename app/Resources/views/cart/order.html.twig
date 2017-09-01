@@ -177,12 +177,12 @@
 
                     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                         <table>
-                            {% for field in form %}
+                            {% for field in ['firstName', 'lastName', 'phone', 'email', 'settlement', 'warehouse'] %}
                                 <tr>
-                                    <td>{{ form_label(field) }}</td>
+                                    <td>{{ form_label(form[field]) }}</td>
                                     <td>
-                                        {{ form_widget(field) }}
-                                        {{ form_errors(field) }}
+                                        {{ form_widget(form[field]) }}
+                                        {{ form_errors(form[field]) }}
                                     </td>
                                 </tr>
                             {% endfor %}

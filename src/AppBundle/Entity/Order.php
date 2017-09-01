@@ -83,11 +83,26 @@ class Order
 	 * @var string
 	 *
 	 * @ORM\Column(type="text")
-	 *
-	 * @Assert\NotBlank()
 	 */
 	protected $address;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=36)
+     *
+     * @Assert\NotBlank()
+     */
+	protected $settlement;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=36)
+     *
+     * @Assert\NotBlank()
+     */
+    protected $warehouse;
 
     /**
      * Get id
@@ -265,5 +280,53 @@ class Order
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set settlement
+     *
+     * @param string $settlement
+     *
+     * @return Order
+     */
+    public function setSettlement($settlement)
+    {
+        $this->settlement = $settlement;
+
+        return $this;
+    }
+
+    /**
+     * Get settlement
+     *
+     * @return string
+     */
+    public function getSettlement()
+    {
+        return $this->settlement;
+    }
+
+    /**
+     * Set warehouse
+     *
+     * @param string $warehouse
+     *
+     * @return Order
+     */
+    public function setWarehouse($warehouse)
+    {
+        $this->warehouse = $warehouse;
+
+        return $this;
+    }
+
+    /**
+     * Get warehouse
+     *
+     * @return string
+     */
+    public function getWarehouse()
+    {
+        return $this->warehouse;
     }
 }
