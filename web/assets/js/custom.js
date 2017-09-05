@@ -25,11 +25,11 @@ $(function () {
                 // Отправляем параметры в формате, который ожидает API новой почты
                 // (https://devcenter.novaposhta.ua/docs/services/556d7ccaa0fe4f08e8f7ce43/operations/58e5ebeceea27017bc851d67).
                 var data = {
-                    apiKey: NOVA_POSHTA_API_KEY,
+                    apiKey: 'd2044641e93fc6fbf9d0de749fab4094',
                     modelName: 'Address',
                     calledMethod: 'searchSettlements',
                     methodProperties: {
-                        CityName: params.term || 'Киї',
+                        CityName: params.term || '',
                         Limit: 20
                     }
                 };
@@ -74,12 +74,12 @@ $(function () {
     $('#order_settlement').on('change', function () {
         // Готовим данные для запроса к НП.
         var request = {
-            apiKey: NOVA_POSHTA_API_KEY,
+            apiKey: 'd2044641e93fc6fbf9d0de749fab4094',
             modelName: 'Address',
             calledMethod: 'getWarehouses',
             methodProperties: {
-                CityName: $(this).find('option:selected').html(),
-                CityRef: $(this).val()
+                CityRef: $(this).val(),
+                Limit: 20
             }
         };
 
@@ -103,7 +103,7 @@ $(function () {
                 var warehouse = response.data[index],
 
                     // Создаем опцию для селекта
-                    $option = $('<option />');
+                    $option = $('<option/>');
 
                 // Указываем в значении опции ID отделения
                 $option.attr('value', warehouse.Ref);
@@ -111,7 +111,7 @@ $(function () {
                 // Указываем в содержимом опции название отделения
                 $option.html(warehouse.Description);
 
-                // Добавляем опцию в селект
+                // Добавялем опцию в селект
                 $warehouseSelect.append($option);
             }
         });

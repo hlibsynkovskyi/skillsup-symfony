@@ -37,8 +37,6 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-    globals:
-        nova_poshta_api_key: '%nova_poshta_api_key%'
 
 # Doctrine Configuration
 doctrine:
