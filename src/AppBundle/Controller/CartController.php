@@ -30,7 +30,7 @@ class CartController extends Controller
 	/**
 	 * @Route("/add-to-cart/{id}", name="add_to_cart")
 	 *
-	 * @param Product $product Продукт для добавления
+	 * @param Product $product
 	 *
 	 * @return Response
 	 */
@@ -41,97 +41,97 @@ class CartController extends Controller
 		return $this->redirectToRoute('cart_dropdown');
 	}
 
-	/**
-	 * @Route("cart/dropdown", name="cart_dropdown")
-	 *
-	 * @return Response
-	 */
+    /**
+     * @Route("cart/dropdown", name="cart_dropdown")
+     *
+     * @return Response
+     */
 	public function dropdownAction()
-	{
-		$cart = $this->get('app.carts')->getCartFromSession();
+    {
+        $cart = $this->get('app.carts')->getCartFromSession();
 
-		return $this->render('cart/dropdown.html.twig', ['cart' => $cart]);
-	}
+        return $this->render('cart/dropdown.html.twig', ['cart' => $cart]);
+    }
 
-	/**
-	 * @Route("/remove-from-cart/{id}", name="remove_from_cart")
-	 *
-	 * @param CartItem $item
-	 *
-	 * @return Response
-	 */
-	public function removeFromCartAction(CartItem $item)
-	{
-		$this->get('app.carts')->removeItemFromCart($item);
+    /**
+     * @Route("cart/remove-from-cart/{id}", name="remove_from_cart")
+     *
+     * @param CartItem $item
+     *
+     * @return Response
+     */
+    public function removeFromCartAction(CartItem $item)
+    {
+        $this->get('app.carts')->removeItemFromCart($item);
 
-		return $this->redirectToRoute('cart_dropdown');
-	}
+        return $this->redirectToRoute('cart_dropdown');
+    }
 
-	/**
-	 * @Route("/set-item-count/{id}", name="set_item_count")
-	 *
-	 * @param CartItem $item
-	 * @param Request  $request
-	 *
-	 * @return Response
-	 */
-	public function setItemCountAction(CartItem $item, Request $request)
-	{
-		$count = intval($request->request->get('count'));
+    /**
+     * @Route("/set-item-count/{id}", name="set_item_count")
+     *
+     * @param CartItem $item
+     * @param Request $request
+     *
+     * @return  Response
+     */
+    public function setItemCountAction(CartItem $item, Request $request)
+    {
+        $count = intval($request->request->get('count'));
 
-		if ( $count <= 0 ) {
-			throw new \LogicException('Неверное количество');
-		}
+        if ( $count <= 0) {
+            throw new \LogicException('Неверное количество');
+        }
 
-		$this->get('app.carts')->setItemCount($item, $count);
+        $this->get('app.carts')->setItemCount($item, $count);
 
-		$result = [
-			'itemCost' => $item->getCost(),
-			'cartCost' => $item->getCart()->getCost(),
-			'cartCount' => $item->getCart()->getCount(),
-		];
+        $result = [
+            'itemCost' => $item->getCost(),
+            'cartCost' => $item->getCart()->getCost(),
+            'cartCount' => $item->getCart()->getCount(),
+        ];
 
-		return new JsonResponse($result);
-	}
+        return new JsonResponse($result);
+    }
 
-	/**
-	 * @Route("/make-order", name="make_order")
-	 *
-	 * @param Request $request
-	 *
-	 * @return Response
-	 */
-	public function orderAction(Request $request)
-	{
-		$carts = $this->get('app.carts'); // Получили сервис для работі с корзиной
-		$cart = $carts->getCartFromSession(); // Получили корзину из сессии
+    /**
+     * @Route("/make-order", name="make_order")
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function orderAction(Request $request)
+    {
+        $carts = $this->get('app.carts'); // Получили сервис для работы с корзиной
+        $cart = $carts->getCartFromSession(); // Получили корзину из сессии
 
-		$order = new Order(); // Создали заказ
-		$order->setCart($cart); // Указали корзину с товарами в заказе
-		$form = $this->createForm(OrderType::class, $order); // Создали форму
+        $order = new Order(); // Создали заказ
+        $order->setCart($carts->getCartFromSession()); // Указали корзину с товарами в заказе
+        $form = $this->createForm(OrderType::class, $order); // Создали форму
 
-		$form->handleRequest($request); // Передаем в форму данніе из запроса
+        $form->handleRequest($request); // Передаем в форму данные из запроса
 
-		if ($form->isSubmitted() && $form->isValid()) { // Была ли отправлена форма и валидна ли она
-			$carts->saveOrder($order); // Сохраняем заказ
+        if ($form->isSubmitted() && $form->isValid()) { // Была ли отправлена форма и валидна ли она
+            $carts->saveOrder($order); // Сохраняем заказ
 
-			return $this->redirectToRoute('thanks_for_order'); // Пересылка на страницу с сообщением об успешном заказе
-		}
+            return $this->redirectToRoute('thanks_for_order'); // Пересылка на страницу с сообщением об успешном заказе
+        }
 
-		return $this->render('cart/order.html.twig', [ // отображаем шаблон
-			'cart' => $cart,
-			'form' => $form->createView(), // В шаблон передается "отображение" формы
-		]);
-	}
+        return $this->render('cart/order.html.twig', [ // отображаем шаблон
+            'cart' => $cart,
+            'form' => $form->createView(), // в шаблон передается "отображение" формы
+        ]);
+    }
 
-	/**
-	 * @Route("/thanks-for-order", name="thanks_for_order")
-	 *
-	 * @return Response
-	 */
-	public function thankYouAction()
-	{
-		return $this->render('cart/thank_you.html.twig');
-	}
+    /**
+     * @Route("thanks-for-order", name="thanks_for_order")
+     *
+     * @return Response
+     */
+    public function  thankYouAction()
+    {
+        return $this->render('cart/thank_you.html.twig');
+    }
 
 }

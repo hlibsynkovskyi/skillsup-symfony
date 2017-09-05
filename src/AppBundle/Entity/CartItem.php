@@ -128,14 +128,14 @@ class CartItem
         return $this->product;
     }
 
-	/**
-	 * Get item cost
-	 *
-	 * @return float
-	 */
+    /**
+     * Get item cost
+     *
+     * @return float
+     */
     public function getCost()
-	{
-		return $this->count * $this->product->getDiscountedPrice();
-	}
+    {
+        return $this->count * $this->product->getDiscountedPrice();
+    }
 
 }

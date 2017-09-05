@@ -14,77 +14,78 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Order
 {
 
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	protected $id;
+    /**
+     * @var integer
+     *
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
-	/**
-	 * @var Cart
-	 *
-	 * @ORM\OneToOne(targetEntity="AppBundle\Entity\Cart", inversedBy="order")
-	 * @ORM\JoinColumn(name="cart_id", onDelete="CASCADE")
-	 */
-	protected $cart;
+    /**
+     * @var Cart
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Cart", inversedBy="order")
+     * @ORM\JoinColumn(name="cart_id", onDelete="CASCADE")
+     */
+    protected $cart;
 
-	/**
-	 * @var User
-	 *
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="orders")
-	 * @ORM\JoinColumn(name="user_id", onDelete="CASCADE")
-	 */
-	protected $user;
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="orders")
+     * @ORM\JoinColumn(name="user_id", onDelete="CASCADE")
+     */
+    protected $user;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=255)
-	 *
-	 * @Assert\NotBlank()
-	 */
-	protected $firstName;
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     */
+    protected $firstName;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=255)
-	 *
-	 * @Assert\NotBlank()
-	 */
-	protected $lastName;
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     */
+    protected $lastName;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=255)
-	 *
-	 * @Assert\NotBlank()
-	 */
-	protected $phone;
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     */
+    protected $phone;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=255)
-	 *
-	 * @Assert\NotBlank()
-	 * @Assert\Email(
-	 *     message = "Неверный адрес - '{{ value }}'.",
-	 *     checkMX = true
-	 * )
-	 */
-	protected $email;
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Assert\Email(
+     *     message = "Неверный адрес - {{ value }}'.",
+     *     checkMX = true
+     * )
+     */
+    protected $email;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="text")
-	 */
-	protected $address;
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text")
+     */
+    protected $address;
 
     /**
      * @var string
@@ -93,7 +94,7 @@ class Order
      *
      * @Assert\NotBlank()
      */
-	protected $settlement;
+    protected $settlement;
 
     /**
      * @var string

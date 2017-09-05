@@ -39,11 +39,11 @@ class User extends BaseUser
 	 */
 	protected $carts;
 
-	/**
-	 * @var Order[]
-	 *
-	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\Order", mappedBy="user")
-	 */
+    /**
+     * @var Order[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Order", mappedBy="user")
+     */
 	protected $orders;
 
     public function __construct()

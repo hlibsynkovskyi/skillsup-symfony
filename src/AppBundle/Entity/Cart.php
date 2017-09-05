@@ -52,11 +52,11 @@ class Cart
 	 */
 	protected $items;
 
-	/**
-	 * @var Order
-	 *
-	 * @ORM\OneToOne(targetEntity="AppBundle\Entity\Order", mappedBy="cart")
-	 */
+    /**
+     * @var Order
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Order", mappedBy="cart")
+     */
 	protected $order;
 
 	/**

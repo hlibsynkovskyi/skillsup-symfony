@@ -1,7 +1,7 @@
 <div class="btn-group dropdown-cart">
     <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
         <span class="cart-menu-icon"></span>
-        {{ cart.count }} item(s) <span class="drop-price">- {{ cart.cost }}</span>
+        {{ cart.count }} <span class="drop-price">- {{ cart.cost }}</span>
     </button>
 
     <div class="dropdown-menu dropdown-cart-menu pull-right clearfix" role="menu">
@@ -12,11 +12,11 @@
                     <a href="{{ path('remove_from_cart', {id: item.id}) }}" title="Delete item" class="delete-item js-cart-btn"><i class="fa fa-times"></i></a>
                     <a href="#" title="Edit item" class="edit-item"><i class="fa fa-pencil"></i></a>
                     <figure>
-                        <a href="{{ path('product', {id: item.product.id}) }}"><img src="{{ asset('assets/images/products/thumbnails/item12.jpg') }}" alt="{{ item.product.name }}"></a>
+                        <a href="{{ path('product', {id: item.product.id}) }}"><img src="{{ asset('assets/images/products/thumbnails/item12.jpg') }}" alt="phone 4"></a>
                     </figure>
                     <div class="dropdown-cart-details">
                         <p class="item-name">
-                            <a href="{{ path('product', {id: item.product.id}) }}">{{ item.product.name }}</a>
+                            <a href="{{ path('product', {id: item.product.id}) }}">{{ item.product.name }} </a>
                         </p>
                         <p>
                             {{ item.count }}x
@@ -29,10 +29,10 @@
 
         <ul class="dropdown-cart-total">
             <li><span class="dropdown-cart-total-title">Shipping:</span>$7</li>
-            <li><span class="dropdown-cart-total-title">Всего:</span> {{ cart.cost }}</li>
+            <li><span class="dropdown-cart-total-title">Total:</span>{{ cart.cost }}</li>
         </ul><!-- .dropdown-cart-total -->
         <div class="dropdown-cart-action">
-            <p><a href="cart.html" class="btn btn-custom-2 btn-block">Cart</a></p>
+            <p><a href="{{ path('cart') }}" class="btn btn-custom-2 btn-block">Cart</a></p>
             <p><a href="checkout.html" class="btn btn-custom btn-block">Checkout</a></p>
         </div><!-- End .dropdown-cart-action -->
 
