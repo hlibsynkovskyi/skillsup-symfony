@@ -25,7 +25,7 @@ $(function () {
                 // Отправляем параметры в формате, который ожидает API новой почты
                 // (https://devcenter.novaposhta.ua/docs/services/556d7ccaa0fe4f08e8f7ce43/operations/58e5ebeceea27017bc851d67).
                 var data = {
-                    apiKey: '6ac8e137ab778e000b0b387c51613ff0',
+                    apiKey: NOVA_POSHTA_API_KEY,
                     modelName: 'Address',
                     calledMethod: 'searchSettlements',
                     methodProperties: {
@@ -55,7 +55,7 @@ $(function () {
 
                     if (address.Warehouses !== 0) {
                         items.push({
-                            id: address.Ref,
+                            id: address.DeliveryCity,
                             text: address.MainDescription
                         });
                     }
@@ -74,12 +74,12 @@ $(function () {
     $('#order_settlement').on('change', function () {
         // Готовим данные для запроса к НП.
         var request = {
-            apiKey: '6ac8e137ab778e000b0b387c51613ff0',
+            apiKey: NOVA_POSHTA_API_KEY,
             modelName: 'Address',
             calledMethod: 'getWarehouses',
             methodProperties: {
-                CityRef: $(this).val(),
-                Limit: 20
+                CityName: $(this).find('option:selected').html(),
+                CityRef: $(this).val()
             }
         };
 
@@ -98,12 +98,12 @@ $(function () {
 
             // Идем по данным из новой почты. Пример на https://my.novaposhta.ua/settings/index
             // в результате выполнения запроса с параметрами, описанными выше в request: function (params)
-            for (var index in request.data) {
+            for (var index in response.data) {
                 // Получаем данные отделения
-                var warehouse = request.data[index],
+                var warehouse = response.data[index],
 
                     // Создаем опцию для селекта
-                    $option = $('<option/>');
+                    $option = $('<option />');
 
                 // Указываем в значении опции ID отделения
                 $option.attr('value', warehouse.Ref);
@@ -111,7 +111,7 @@ $(function () {
                 // Указываем в содержимом опции название отделения
                 $option.html(warehouse.Description);
 
-                // Добавялем опцию в селект
+                // Добавляем опцию в селект
                 $warehouseSelect.append($option);
             }
         });
