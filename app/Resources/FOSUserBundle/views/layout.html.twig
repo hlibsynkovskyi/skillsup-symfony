@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
+
+
     {% if app.request.hasPreviousSession %}
         {% for type, messages in app.session.flashbag.all() %}
             {% for message in messages %}
@@ -11,6 +12,9 @@
         {% endfor %}
     {% endif %}
 
-    {% block fos_user_content %}
-    {% endblock fos_user_content %}
+
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+
 {% endblock %}
+

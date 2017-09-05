@@ -1,7 +1,12 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: 1
+ * Date: 07.07.2017
+ * Time: 19:34
+ */
 
 namespace AppBundle\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,80 +19,79 @@ use Doctrine\ORM\Mapping as ORM;
 class Product
 {
 
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	protected $id;
+    /**
+     * @var integer
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+protected $id;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=250)
-	 */
-	protected $name;
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=250)
+     */
+    protected $name;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="decimal", precision=10, scale=2)
-	 */
-	protected $price;
+    /**
+     * @var string
+     * @ORM\Column(type="decimal", precision=10, scale=2)
+     */
+    protected $price;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=250, nullable=true)
-	 */
-	protected $photo;
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    protected $photo;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=40, nullable=true)
-	 */
-	protected $sku;
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    protected $sku;
 
-	/**
-	 * @var Category
-	 *
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="products")
-	 * @ORM\JoinColumn(name="category_id", onDelete="CASCADE")
-	 */
-	protected $category;
+    /**
+     * @var Category
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="products")
+     * @ORM\JoinColumn(name="category_id", onDelete="CASCADE")
+     */
+    protected $category;
 
-	/**
-	 * @var boolean
-	 *
-	 * @ORM\Column(type="boolean", nullable=true)
-	 */
-	protected $isNew;
+    /**
+     * @var boolean
+     * @ORM\Column(type="boolean" ,  nullable=true)
+     *
+     */
+    protected $isNew;
 
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(type="integer", nullable=true)
-	 */
-	protected $discount;
+    /**
+     * @var integer
+     * @ORM\Column(type="integer" ,  nullable=true)
+     */
+    protected $discount;
 
-	/**
-	 * @var CartItem[]
-	 *
-	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\CartItem", mappedBy="product")
-	 */
-	protected $cartItems;
 
-	public function __construct()
-	{
-		$this->isNew = true;
-		$this->discount = 0;
-		$this->cartItems = new ArrayCollection();
-	}
+    /**
+     * @var CartItem[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\CartItem" , mappedBy="product")
+     */
+    protected $cartItem;
 
-	/**
+
+
+
+
+
+    public function __construct()
+    {
+        $this->isNew = true;
+        $this->discount =0;
+        $this->cartItem = new ArrayCollection();
+    }
+
+
+    /**
      * Get id
      *
      * @return integer
@@ -107,7 +111,6 @@ class Product
     public function setName($name)
     {
         $this->name = $name;
-        $this->color = 'blue';
 
         return $this;
     }
@@ -266,20 +269,19 @@ class Product
         return $this->discount;
     }
 
-	/**
-	 * Get discounted price.
-	 *
-	 * @return float
-	 */
+
+    /**
+     * Get discounted price
+     *
+     * @return float
+     */
     public function getDiscountedPrice()
-	{
-		if ( !$this->discount ) {
-			return $this->price;
-		}
-
-		return $this->price - round($this->price * $this->discount / 100, 2);
-	}
-
+    {
+        if(!$this->discount){
+            return $this->price;
+        }
+        return $this->price - round($this->price * $this->discount/ 100, 2);
+    }
 
     /**
      * Add cartItem
@@ -290,7 +292,7 @@ class Product
      */
     public function addCartItem(\AppBundle\Entity\CartItem $cartItem)
     {
-        $this->cartItems[] = $cartItem;
+        $this->cartItem[] = $cartItem;
 
         return $this;
     }
@@ -302,16 +304,16 @@ class Product
      */
     public function removeCartItem(\AppBundle\Entity\CartItem $cartItem)
     {
-        $this->cartItems->removeElement($cartItem);
+        $this->cartItem->removeElement($cartItem);
     }
 
     /**
-     * Get cartItems
+     * Get cartItem
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCartItems()
+    public function getCartItem()
     {
-        return $this->cartItems;
+        return $this->cartItem;
     }
 }

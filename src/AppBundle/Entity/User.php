@@ -1,4 +1,6 @@
 <?php
+// src/AppBundle/Entity/User.php
+
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,44 +20,44 @@ class User extends BaseUser
      */
     protected $id;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=250)
-	 */
-    protected $firstName;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=250)
-	 */
-	protected $lastName;
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=250)
+     */
+     protected $firstName;
 
-	/**
-	 * @var Cart[]
-	 *
-	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\Cart", mappedBy="user")
-	 */
-	protected $carts;
 
-	/**
-	 * @var Order[]
-	 *
-	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\Order", mappedBy="user")
-	 */
-	protected $orders;
+     /**
+     * @var string
+     * @ORM\Column(type="string", length=250)
+     */
+    protected $lastName;
+
+    /**
+     * @var Cart[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Cart" , mappedBy="user")
+     */
+    protected $carts;
+
+    /**
+     * @var Order[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Order" , mappedBy="user")
+     */
+    protected $orders;
+
+
+
+
 
     public function __construct()
     {
         parent::__construct();
-
         $this->firstName = '';
         $this->lastName = '';
         $this->carts = new ArrayCollection();
-        $this->orders = new ArrayCollection();
+        $this->orders=new ArrayCollection();
     }
-
 
     /**
      * Set firstName

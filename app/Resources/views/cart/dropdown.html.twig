@@ -1,40 +1,49 @@
-<div class="btn-group dropdown-cart">
-    <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
-        <span class="cart-menu-icon"></span>
-        {{ cart.count }} item(s) <span class="drop-price">- {{ cart.cost }}</span>
-    </button>
 
-    <div class="dropdown-menu dropdown-cart-menu pull-right clearfix" role="menu">
-        <p class="dropdown-cart-description">Recently added item(s).</p>
-        <ul class="dropdown-cart-product-list">
-            {% for item in cart.items %}
-                <li class="item clearfix">
-                    <a href="{{ path('remove_from_cart', {id: item.id}) }}" title="Delete item" class="delete-item js-cart-btn"><i class="fa fa-times"></i></a>
-                    <a href="#" title="Edit item" class="edit-item"><i class="fa fa-pencil"></i></a>
-                    <figure>
-                        <a href="{{ path('product', {id: item.product.id}) }}"><img src="{{ asset('assets/images/products/thumbnails/item12.jpg') }}" alt="{{ item.product.name }}"></a>
-                    </figure>
-                    <div class="dropdown-cart-details">
-                        <p class="item-name">
-                            <a href="{{ path('product', {id: item.product.id}) }}">{{ item.product.name }}</a>
-                        </p>
-                        <p>
-                            {{ item.count }}x
-                            <span class="item-price">{{ item.product.discountedPrice }}</span>
-                        </p>
-                    </div><!-- End .dropdown-cart-details -->
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="btn-group dropdown-cart">
+            <button type="button" class="btn btn-custom dropdown-toggle" data-toggle="dropdown">
+                <span class="cart-menu-icon"></span>
+                {{ cart.count }} <span class="drop-price"> - {{ cart.cost }}</span>
+            </button>
 
-        <ul class="dropdown-cart-total">
-            <li><span class="dropdown-cart-total-title">Shipping:</span>$7</li>
-            <li><span class="dropdown-cart-total-title">Всего:</span> {{ cart.cost }}</li>
-        </ul><!-- .dropdown-cart-total -->
-        <div class="dropdown-cart-action">
-            <p><a href="cart.html" class="btn btn-custom-2 btn-block">Cart</a></p>
-            <p><a href="checkout.html" class="btn btn-custom btn-block">Checkout</a></p>
-        </div><!-- End .dropdown-cart-action -->
+            <div class="dropdown-menu dropdown-cart-menu pull-right clearfix" role="menu">
+                <p class="dropdown-cart-description">В корзину добавлено:</p>
+                <ul class="dropdown-cart-product-list">
+                    {% for item in cart.items %}
+                    <li class="item clearfix">
+                        <a href="{{ path('remove_from_dropdown' , {id: item.id})}}" title="Delete item" class="delete-item js-cart-btn"><i class="fa fa-times"></i></a>
+                        <a href="#" title="Edit item" class="edit-item"><i class="fa fa-pencil"></i></a>
 
-    </div><!-- End .dropdown-cart -->
-</div><!-- End .btn-group -->
+                        <figure>
+                            <a href="{{ path('product' , {id: item.product.id})}}"><img src="{{ item.product.photo }}" alt="photo"></a>
+                        </figure>
+
+                            <div class="dropdown-cart-details">
+                            <p class="item-name">
+                                <a href="{{ path('product' , {id: item.product.id})}}">{{ item.product.name }}</a>
+                            </p>
+                            <p>
+                                {{ item.count }}x
+                                <span class="item-price">{{ item.product.discountedPrice }}</span>
+                            </p>
+                        </div><!-- End .dropdown-cart-details -->
+                    </li>
+                    {% endfor %}
+
+                </ul>
+
+                <ul class="dropdown-cart-total">
+                    <li><span class="dropdown-cart-total-title">Shipping:</span>$$$</li>
+                    <li><span class="dropdown-cart-total-title">Всего:</span>{{ cart.cost }}<span class="sub-price"></span></li>
+                </ul><!-- .dropdown-cart-total -->
+                <div class="dropdown-cart-action">
+                    <p><a href="{{ path('cart' , {id: cart.id})}}" class="btn btn-custom-2 btn-block">В корзину -></a></p>
+                    <p><a href="{{ path('make_order' , {id: cart.id})}}" class="btn btn-custom btn-block">Checkout</a></p>
+                </div><!-- End .dropdown-cart-action -->
+
+            </div><!-- End .dropdown-cart -->
+        </div><!-- End .btn-group -->
+
+
+
+
+

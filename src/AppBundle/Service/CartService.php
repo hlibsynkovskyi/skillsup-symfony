@@ -1,6 +1,15 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: 1
+ * Date: 08.08.2017
+ * Time: 20:29
+ */
 
 namespace AppBundle\Service;
+
+
+
 
 use AppBundle\Entity\Cart;
 use AppBundle\Entity\CartItem;
@@ -13,129 +22,100 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class CartService
 {
 
-	/**
-	 * @var EntityManager
-	 */
-	protected $manager;
+    /**
+     * @var EntityManager
+     */
+    protected $manager;
 
-	/**
-	 * @var Session
-	 */
-	protected $session;
 
-	public function __construct(Registry $doctrine, Session $session)
-	{
-		$this->manager = $doctrine->getManager();
-		$this->session = $session;
-	}
+    public function __construct(Registry $doctrine, Session $session)
+    {
+        $this->manager = $doctrine->getManager();
+        $this->session=$session;
+    }
 
-	public function addProductToCart(Product $product, $count = 1)
-	{
-		$cart = $this->getCartFromSession();
-		$cartItem = null;
 
-		/** @var CartItem $item */
-		foreach ($cart->getItems() as $item) {
-			if ( $item->getProduct()->getId() === $product->getId() ) {
-				$cartItem = $item;
-				break;
-			}
-		}
+    public function addProductToCart(Product $product, $count=1)
+    {
+        $cart = $this->getCartFromSession();
+        $cartItem=null;
 
-		if ($cartItem) {
-			$cartItem->setCount($cartItem->getCount() + $count);
-		} else {
-			$cartItem = new CartItem();
-			$cartItem->setCart($cart);
-			$cartItem->setProduct($product);
-			$cartItem->setCount($count);
-		}
+        /** @var CartItem $item */
+        foreach ($cart->getItems() as $item){
+            if ($item->getProduct()->getId() === $product->getId()){
+                $cartItem = $item;
+                break;
+            }
+        }
 
-		$this->manager->persist($cartItem);
+        if($cartItem) {
+            $cartItem->setCount($cartItem->getCount() + $count);
+        }else{
+            $cartItem=new CartItem;
+            $cartItem->setCart($cart);
+            $cartItem->setProduct($product);
+            $cartItem->setCount($count);
+        }
 
-		$cart->setCount($cart->getCount() + $count);
-		$cart->setCost($cart->getCost() + $cartItem->getCost());
-		$this->manager->persist($cart);
+        $this->manager->persist($cartItem);
 
-		$this->manager->flush();
-	}
+        $cart->setCount($cart->getCount()+ $count);
+        $cart->setCost($cart->getCost()+ $product->getDiscountedPrice()*$count);
+        $this->manager->persist($cart);
 
-	public function getCartFromSession()
-	{
-		$cartId = $this->session->get('cart_id');
+        $this->manager->flush();
+    }
 
-		if ($cartId) {
-			$cart = $this->manager->find(Cart::class, $cartId);
-		} else {
-			$cart = null;
-		}
+    public function getCartFromSession()
+    {
+        $cartId = $this->session->get('cart_id');
+           if($cartId){
+               $cart = $this->manager->find(Cart::class, $cartId);
+           }else{
+               $cart=null;
+           }
+            if(!$cart){
+                $cart = new Cart();
+                $this->manager->persist($cart);
+                $this->manager->flush();
+                $this->session->set('cart_id', $cart->getId());
+            }
 
-		if (!$cart) {
-			$cart = new Cart();
-			$this->manager->persist($cart);
-			$this->manager->flush();
-			$this->session->set('cart_id', $cart->getId());
-		}
+            return $cart;
+    }
 
-		return $cart;
-	}
 
-	public function removeItemFromCart(CartItem $item)
-	{
-		// Получили корзину
-		$cart = $item->getCart();
 
-		// Обновляем общее кол-во товаров в корзине
-		$cart->setCount($cart->getCount() - $item->getCount());
 
-		// Обновляем общую стоимость товаров в корзине
-		$cart->setCost($cart->getCost() - $item->getCost());
+    public function removeItemFromCart(CartItem $item)
+    {
+        $cart=$item->getCart();
+        $cart->setCount($cart->getCount()-$item->getCount());
+        $cart->setCost($cart->getCost()- $item->getCost());
+        $this->manager->persist($cart);
+        $this->manager->remove($item);
+        $this->manager->flush();
+    }
 
-		// Помечаем корзину для сохранения в БД
-		$this->manager->persist($cart);
+    /**
+     * изменение кол товара в корзине
+     * @param CartItem $item  елемент корзины
+     * @param integer $count новое количество
+     */
+    public function setItemCount(CartItem $item, $count)
+    {
+         $cart=$item->getCart(); // получили корзну
+        $cart->setCount($cart->getCount()-$item->getCount()); // сколько товара в корзине без текущего
+        $cart->setCost($cart->getCost()- $item->getCost()); //обновляем общую стоимость в корзине
+       $item->setCount($count); // уст нов количество товара
+       $cart->setCount($cart->getCount()+$count); //добав новое количество товара в корину
+       $cart->setCost($cart->getCost()+$item->getCost()); // добав стоимость товара
+        $this->manager->flush();
+         }
 
-		// Помечаем элемент корзины для удаления в БД
-		$this->manager->remove($item);
-
-		// Применяем изменения в БД
-		$this->manager->flush();
-	}
-
-	/**
-	 * Изменение кол-ва товара в корзине
-	 *
-	 * @param CartItem $item  Элемент корзины
-	 * @param integer  $count Новое количество
-	 */
-	public function setItemCount(CartItem $item, $count)
-	{
-		// Получили корзину
-		$cart = $item->getCart();
-
-		// Вычисляем сколько товаров в корзине было бы без текущего
-		$cart->setCount($cart->getCount() - $item->getCount());
-
-		// Обновляем общую стоимость товаров в корзине
-		$cart->setCost($cart->getCost() - $item->getCost());
-
-		// Устанавливаем новое кол-во товара
-		$item->setCount($count);
-
-		// Добавляем новое кол-во товара в корзину
-		$cart->setCount($cart->getCount() + $count);
-
-		// Добавляем стоимость товара
-		$cart->setCost($cart->getCost() + $item->getCost());
-
-		// Применяем изменения в БД
-		$this->manager->flush();
-	}
-
-	public function saveOrder(Order $order)
-	{
-		$this->manager->persist($order);
-		$this->manager->flush();
-		$this->session->remove('cart_id');
-	}
-
+    public function saveOrder(Order $order){
+        $this->manager->persist($order);
+        $this->manager->flush();
+        $this->session->remove('cart_id');
+    }
 }

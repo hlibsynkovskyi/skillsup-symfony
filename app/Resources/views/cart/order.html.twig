@@ -1,199 +1,384 @@
 {% extends 'base.html.twig' %}
-    {% block body %}
+
+{% block body %}
+
 
     <section id="content">
         <div id="breadcrumb-container">
             <div class="container">
                 <ul class="breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active">Shopping Cart</li>
+                    <li><a href="{{ path('homepage') }}">Главная</a></li>
+                    <li class="active">Checkout</li>
                 </ul>
             </div>
         </div>
+
+
+
+
+
+
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <header class="content-title">
-                        <h1 class="title">Shopping Cart</h1>
-                        <p class="title-desc">Just this week, you can use the free premium delivery.</p>
+                        <h1 class="title">Checkout</h1>
+                        <p class="title-desc">Quisque elementum nibh at dolor pellentesque, a eleifend libero pharetra.</p>
                     </header>
                     <div class="xs-margin"></div><!-- space -->
-                    <div class="row">
+                    <form action="#" id="checkout-form">
+                        <div class="panel-group custom-accordion" id="checkout">
+                            <div class="panel">
+                                <div class="accordion-header">
+                                    <div class="accordion-title">1 Step: <span>Checkout Option</span></div><!-- End .accordion-title -->
+                                    <a class="accordion-btn opened"  data-toggle="collapse" data-target="#checkout-option"></a>
+                                </div><!-- End .accordion-header -->
 
-                        <div class="col-md-12 table-responsive">
+                                <div id="checkout-option" class="collapse in">
+                                    <div class="panel-body">
+                                        <div class="row">
+
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <h2 class="checkout-title">New Customer</h2>
+                                                <p>Register with us for future convenience:</p>
+                                                <div class="xs-margin"></div>
+                                                <div class="input-group custom-checkbox sm-margin">
+                                                    <input type="checkbox"> <span class="checbox-container">
+											 	<i class="fa fa-check"></i>
+											 </span>
+                                                    Checkout as Guest
+
+                                                </div><!-- End .input-group -->
+                                                <div class="input-group custom-checkbox sm-margin">
+                                                    <input type="checkbox"> <span class="checbox-container">
+											 	<i class="fa fa-check"></i>
+											 </span>
+                                                    Register
+
+                                                </div><!-- End .input-group -->
+                                                <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+                                                <div class="md-margin"></div>
+
+                                            </div><!-- End .col-md-6 -->
+
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <h2 class="checkout-title">Registered Customers</h2>
+                                                <p>If you have an account with us, please log in.</p>
+                                                <div class="xs-margin"></div>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="input-icon input-icon-email"></span><span class="input-text">Email&#42;</span></span>
+                                                    <input type="text" required class="form-control input-lg" placeholder="Your Email">
+                                                </div><!-- End .input-group -->
+                                                <div class="input-group xs-margin">
+                                                    <span class="input-group-addon"><span class="input-icon input-icon-password"></span><span class="input-text">Password&#42;</span></span>
+                                                    <input type="text" required class="form-control input-lg" placeholder="Your Password">
+                                                </div><!-- End .input-group -->
+                                                <span class="help-block text-right"><a href="#">Forgot your password?</a></span>
+                                                <div class="input-group custom-checkbox sm-margin top-10px">
+                                                    <input type="checkbox"> <span class="checbox-container">
+											 	<i class="fa fa-check"></i>
+											 </span>
+                                                    Remember my password
+
+                                                </div><!-- End .input-group -->
+                                            </div><!-- End .col-md-6 -->
+
+                                        </div><!-- End.row -->
+
+                                        <a href="#" class="btn btn-custom-2">CONTINUE</a>
+                                    </div><!-- End .panel-body -->
+                                </div><!-- End .panel-collapse -->
+
+                            </div><!-- End .panel -->
+
+                            <div class="panel">
+                                <div class="accordion-header">
+                                    <div class="accordion-title">2 Step: <span>Billing Information</span></div><!-- End .accordion-title -->
+                                    <a class="accordion-btn"  data-toggle="collapse" data-target="#billing"></a>
+                                </div><!-- End .accordion-header -->
+
+                                <div id="billing" class="collapse">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                <h2 class="checkout-title">Ваша персональная информация</h2>
 
 
+                                                {{ form_start(form, {'attr':{'novalidate': 'novalidate'}}) }}
+                                                    {%  for field in ['firstname', 'lastname', 'phone', 'email', 'settlment', 'warehouse']  %}
 
-                            <table class="table cart-table">
-                                <thead>
-                                <tr>
-                                    <th class="table-title">Product Name</th>
-                                    <th class="table-title">Product Code</th>
-                                    <th class="table-title">Unit Price</th>
-                                    <th class="table-title">Quantity</th>
-                                    <th class="table-title">SubTotal</th>
-                                </tr>
-                                </thead>
-                                <tbody>
 
-                                {% for item in cart.items %}
-                                <tr>
-                                    <td class="item-name-col">
-                                        <figure>
-                                            <a href={{ path('product', {'id':item.product.id}) }}><img src={{ item.product.photo }} alt="Lowlands Lace Blouse"></a>
-                                        </figure>
-                                        <header class="item-name"><a href="#">{{ item.product.name }}</a></header>
-                                        <ul>
-                                            <li>Color: White</li>
-                                            <li>Size: SM</li>
-                                        </ul>
-                                    </td>
-                                    <td class="item-code">MP125984154</td>
-                                    <td class="item-price-col"><span class="item-price-special">{{ item.product.discountedPrice }}</span></td>
-                                    <td>
-                                        <div class="custom-quantity-input">
-                                            <input type="text" name="quantity" class="js-item-count" data-update-url="{{ path('set_item_count', {'id': item.id}) }}" data-original-value="{{ item.count }}" value="{{ item.count }}">
-                                            <a href="#" onclick="return false;" class="quantity-btn quantity-input-up"><i class="fa fa-angle-up"></i></a>
-                                            <a href="#" onclick="return false;" class="quantity-btn quantity-input-down"><i class="fa fa-angle-down"></i></a>
+                                                        <div class="input-group">
+                                                               <span class="input-group-addon"><span class="input-icon input-icon-user"></span><span class="input-text">{{ form_label(form[field]) }}&#42;</span></span>
+                                                               <input type="text" required class="form-control input-lg" placeholder="Введите данные">
+
+                                                                {{ form_widget(form[field]) }}
+                                                                {{ form_errors(form[field]) }}
+
+                                                </div><!-- End .input-group -->
+                                                    {% endfor %}
+
+                                                {{ form_end(form) }}
+
+                                                <div class="input-group xlg-margin">
+                                                    <span class="input-group-addon"><span class="input-icon input-icon-company"></span><span class="input-text">Company&#42;</span></span>
+                                                    <input type="text" required class="form-control input-lg" placeholder="Your Company">
+                                                </div><!-- End .input-group -->
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="input-icon input-icon-password"></span><span class="input-text">Password&#42;</span></span>
+                                                    <input type="password" required class="form-control input-lg" placeholder="Your Password">
+                                                </div><!-- End .input-group -->
+                                                <div class="input-group xlg-margin">
+                                                    <span class="input-group-addon"><span class="input-icon input-icon-password"></span><span class="input-text">Password&#42;</span></span>
+                                                    <input type="password" required class="form-control input-lg" placeholder="Your Password">
+                                                </div><!-- End .input-group -->
+
+                                                <div class="input-group custom-checkbox sm-margin">
+                                                    <input type="checkbox"> <span class="checbox-container">
+											 	<i class="fa fa-check"></i>
+											 </span>
+                                                    I wish to subscribe to the Venedor newsletter.
+
+                                                </div><!-- End .input-group -->
+
+                                                <div class="input-group custom-checkbox sm-margin">
+                                                    <input type="checkbox"> <span class="checbox-container">
+											 	<i class="fa fa-check"></i>
+											 </span>
+                                                    My delivery and billing addresses are the same.
+
+                                                </div><!-- End .input-group -->
+
+                                            </div><!-- End .col-md-6 -->
+
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <h2 class="checkout-title">Your Address</h2>
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="input-icon input-icon-address"></span><span class="input-text">Address 1&#42;</span></span>
+                                                    <input type="text" class="form-control input-lg" placeholder="Your Address">
+                                                </div><!-- End .input-group -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="input-icon input-icon-address"></span><span class="input-text">Address 2&#42;</span></span>
+                                                    <input type="text" required  class="form-control input-lg" placeholder="Your Address">
+                                                </div><!-- End .input-group -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="input-icon input-icon-city"></span><span class="input-text">City&#42;</span></span>
+                                                    <input type="text" required class="form-control input-lg" placeholder="Your City">
+                                                </div><!-- End .input-group -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="input-icon input-icon-postcode"></span><span class="input-text">Post Code&#42;</span></span>
+                                                    <input type="text" required class="form-control input-lg" placeholder="Your Post Code">
+                                                </div><!-- End .input-group -->
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="input-icon input-icon-country"></span><span class="input-text">Country*</span></span>
+                                                    <div class="large-selectbox clearfix">
+                                                        <select id="country" name="country" class="selectbox">
+                                                            <option  value="United Kingdom">United Kingdom</option>
+                                                            <option  value="Brazil">Brazil</option>
+                                                            <option  value="France">France</option>
+                                                            <option  value="Italy">Italy</option>
+                                                            <option  value="Spain">Spain</option>
+                                                        </select>
+                                                    </div><!-- End .large-selectbox-->
+                                                </div><!-- End .input-group -->
+
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="input-icon input-icon-region"></span><span class="input-text">Region / State&#42;</span></span>
+                                                    <div class="large-selectbox clearfix">
+                                                        <select id="state" name="state" class="selectbox">
+                                                            <option  value="California">California</option>
+                                                            <option  value="Texas">Texas</option>
+                                                            <option  value="NewYork">NewYork</option>
+                                                            <option  value="Narnia">Narnia</option>
+                                                            <option  value="Jumanji">Jumanji</option>
+                                                        </select>
+                                                    </div><!-- End .large-selectbox-->
+                                                </div><!-- End .input-group -->
+                                                <div class="input-group custom-checkbox md-margin">
+                                                    <input type="checkbox"> <span class="checbox-container">
+											 	<i class="fa fa-check"></i>
+											 </span>
+                                                    I have reed and agree to the <a href="#">Privacy Policy</a>.
+
+                                                </div><!-- End .input-group -->
+                                                <a href="#" class="btn btn-custom-2">CONTINUE</a>
+                                            </div><!-- End .col-md-6 -->
+
+                                        </div><!-- End .row -->
+                                    </div><!-- End .panel-body -->
+                                </div><!-- End .panel-collapse -->
+
+                            </div><!-- End .panel -->
+
+                            <div class="panel">
+                                <div class="accordion-header">
+                                    <div class="accordion-title">3 Step: <span>Delivery Details</span></div><!-- End .accordion-title -->
+                                    <a class="accordion-btn"  data-toggle="collapse" data-target="#delivery-details"></a>
+                                </div><!-- End .accordion-header -->
+
+                                <div id="delivery-details" class="collapse">
+                                    <div class="panel-body">
+                                        <p>Details about delivery</p>
+                                    </div><!-- End .panel-body -->
+                                </div><!-- End .panel-collapse -->
+
+                            </div><!-- End .panel -->
+
+
+                            <div class="panel">
+                                <div class="accordion-header">
+                                    <div class="accordion-title">4 Step: <span>Delivery Method</span></div><!-- End .accordion-title -->
+                                    <a class="accordion-btn"  data-toggle="collapse" data-target="#delivery-method"></a>
+                                </div><!-- End .accordion-header -->
+
+                                <div id="delivery-method" class="collapse">
+                                    <div class="panel-body">
+                                        <p>Choose your delivery method.</p>
+                                    </div><!-- End .panel-body -->
+                                </div><!-- End .panel-collapse -->
+
+                            </div><!-- End .panel -->
+
+                            <div class="panel">
+                                <div class="accordion-header">
+                                    <div class="accordion-title">5 Step: <span>Payment Method</span></div><!-- End .accordion-title -->
+                                    <a class="accordion-btn"  data-toggle="collapse" data-target="#payment-method"></a>
+                                </div><!-- End .accordion-header -->
+
+                                <div id="payment-method" class="collapse">
+                                    <div class="panel-body">
+                                        <p>Choose your payment method.</p>
+                                    </div><!-- End .panel-body -->
+                                </div><!-- End .panel-collapse -->
+
+                            </div><!-- End .panel -->
+
+                            <div class="panel">
+                                <div class="accordion-header">
+                                    <div class="accordion-title">6 Step: <span>Подтверждение заказа</span></div><!-- End .accordion-title -->
+                                    <a class="accordion-btn opened"  data-toggle="collapse" data-target="#confirm"></a>
+                                </div><!-- End .accordion-header -->
+
+                                <div id="confirm" class="collapse in">
+                                    <div class="panel-body">
+
+
+                                        <div class="table-responsive">
+                                            <table class="table checkout-table">
+                                                <thead>
+                                                <tr>
+                                                    <th class="table-title">Наименование товара</th>
+                                                    <th class="table-title">Стоимость еденицы товара</th>
+                                                    <th class="table-title">Количество</th>
+                                                    <th class="table-title">Общая стоимость</th>
+
+                                                </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                {% for item in cart.items %}
+                                                    <tr>
+                                                        <td class="item-name-col">
+                                                            <figure>
+                                                                <a href="{{ path('product' , {id: item.product.id})}}"><img src="{{ item.product.photo }}" alt="{{ item.product.name }}"></a>
+                                                            </figure>
+                                                            <header class="item-name"><a href="{{ path('product' , {id: item.product.id})}}">{{ item.product.name }}</a></header>
+                                                            <ul>
+                                                                <li>Параметры: </li>
+
+                                                            </ul>
+                                                        </td>
+
+                                                        <td class="item-price-col"><span class="item-price-special">{{ item.product.discountedPrice }}</span></td>
+                                                        <td>
+                                                            <div class="custom-quantity-input">
+                                                                <input type="text" name="quantity" class="js-item-count" data-update-url="{{ path('set_item_count',{'id':item.id}) }}" data-original-value="{{ item.count }}" value="{{ item.count }}">
+                                                                <a href="#" onclick="return false;" class="quantity-btn quantity-input-up"><i class="fa fa-angle-up"></i></a>
+                                                                <a href="#" onclick="return false;" class="quantity-btn quantity-input-down"><i class="fa fa-angle-down"></i></a>
+
+                                                            </div>
+                                                        </td>
+                                                        <td class="item-total-col"><span class="item-price-special js-item-cost">{{ item.cost }}</span>
+                                                            <a href="{{ path('remove_from_cart' , {id: item.id})}}" class="close-button"></a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+
+
+                                                <tr>
+                                                    <td class="checkout-table-title" colspan="3">Стоимость товара:</td>
+                                                    <td class="checkout-table-price">{{ cart.cost }}</td>
+                                                </tr>
+                                                <tr>
+
+                                                    <td class="checkout-table-title" colspan="3">Стоимость доставки:</td>
+                                                    <td class="checkout-table-price">$0.00</td>
+                                                </tr>
+                                                <tr>
+
+                                                    <td class="checkout-table-title" colspan="3">Общее количество товара:</td>
+                                                    <td class="checkout-table-price">{{ cart.count }}</td>
+                                                </tr>
+
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td class="checkout-total-title" colspan="3"><strong>Стоимость всего:</strong></td>
+                                                    <td class="checkout-total-price cart-total"><strong>{{ cart.cost }}</strong></td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+
+                                        </div><!-- End .table-reponsive -->
+
+
+                                        <div class="lg-margin"></div><!-- space -->
+                                        <div class="text-right">
+                                            {{ form_start(form, {'attr':{'novalidate': 'novalidate'}}) }}
+
+                                            <input  type="submit" class="btn btn-custom-2" value="Подтвердить заказ">
+                                            {{ form_end(form) }}
+
                                         </div>
-                                    </td>
-                                    <td class="item-total-col"><span class="item-price-special js-item-cost">{{ item.cost }}</span>
-                                        <a href="#" class="close-button"></a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                                    </div><!-- End .panel-body -->
+                                </div><!-- End .panel-collapse -->
 
-
-
-                        </div><!-- End .col-md-12 -->
-
-                    </div><!-- End .row -->
-                    <div class="lg-margin"></div><!-- End .space -->
-
-                    <div class="row">
-                        <div class="col-md-8 col-sm-12 col-xs-12 lg-margin">
-
-                            <div class="tab-container left clearfix">
-                                <ul class="nav-tabs">
-                                    <li class="active"><a href="#shipping" data-toggle="tab">Shipping &amp; Taxes</a></li>
-                                    <li><a href="#discount" data-toggle="tab">Discount Code</a></li>
-                                    <li><a href="#gift" data-toggle="tab">Gift voucher </a></li>
-
-                                </ul>
-                                <div class="tab-content clearfix">
-                                    <div class="tab-pane active" id="shipping">
-
-                                        <form action="#" id="shipping-form">
-                                            <p class="shipping-desc">Enter your destination to get a shipping estimate.</p>
-                                            <div class="form-group">
-                                                <label for="select-country" class="control-label">Country&#42;</label>
-                                                <div class="input-container normal-selectbox">
-                                                    <select id="select-country" name="select-country" class="selectbox">
-                                                        <option  value="Japan">Japan</option>
-                                                        <option  value="Brazil">Brazil</option>
-                                                        <option  value="France">France</option>
-                                                        <option  value="Italy">Italy</option>
-                                                        <option  value="Spain">Spain</option>
-                                                    </select>
-                                                </div><!-- End .select-container -->
-                                            </div><!-- End .form-group -->
-                                            <div class="xss-margin"></div>
-                                            <div class="form-group">
-                                                <label for="select-state" class="control-label">Regison/State&#42;</label>
-                                                <div class="input-container normal-selectbox">
-                                                    <select id="select-state" name="select-state" class="selectbox">
-                                                        <option  value="California">California</option>
-                                                        <option  value="Texas">Texas</option>
-                                                        <option  value="NewYork">NewYork</option>
-                                                        <option  value="Narnia">Narnia</option>
-                                                        <option  value="Jumanji">Jumanji</option>
-                                                    </select>
-                                                </div><!-- End .select-container -->
-                                            </div><!-- End .form-group -->
-                                            <div class="xss-margin"></div>
-                                            <div class="form-group">
-                                                <label for="select-country" class="control-label"  >Post Code&#42;</label>
-                                                <div class="input-container">
-                                                    <input type="text" required class="form-control" placeholder="Your fax">
-                                                </div>
-                                            </div><!-- End .form-group -->
-                                            <div class="xss-margin"></div>
-                                            <p class="text-right">
-                                                <input type="submit" class="btn btn-custom-2" value="GET QUOTES">
-                                            </p>
-                                        </form>
-
-                                    </div><!-- End .tab-pane -->
-
-                                    <div class="tab-pane" id="discount">
-                                        <p>Enter your discount coupon code here.</p>
-                                        <form action="#">
-                                            <div class="input-group">
-                                                <input type="text" required class="form-control" placeholder="Coupon code">
-
-                                            </div><!-- End .input-group -->
-                                            <input type="submit" class="btn btn-custom-2" value="APPLY COUPON">
-                                        </form>
-                                    </div><!-- End .tab-pane -->
-
-                                    <div class="tab-pane" id="gift">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi dignissimos nostrum debitis optio molestiae in quam dicta labore obcaecati ullam necessitatibus animi deleniti minima dolor suscipit nobis est excepturi inventore.</p>
-                                    </div><!-- End .tab-pane -->
-
-                                </div><!-- End .tab-content -->
-                            </div><!-- End .tab-container -->
-
-                        </div><!-- End .col-md-8 -->
-
-                        <div class="col-md-4 col-sm-12 col-xs-12">
-
-                            <table class="table total-table">
-                                <tbody>
-                                <tr>
-                                    <td class="total-table-title">Общее количество:</td>
-                                    <td class="js-cart-count">{{ cart.count }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="total-table-title">Subtotal:</td>
-                                    <td class="js-cart-cost">{{ cart.cost }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="total-table-title">Shipping:</td>
-                                    <td>$6.00</td>
-                                </tr>
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <td>Всего:</td>
-                                    <td class="js-cart-cost">{{ cart.cost }}</td>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </div><!-- End .col-md-4 -->
-                    </div><!-- End .row -->
-                    <div class="md-margin2x"></div><!-- Space -->
-
-                    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-                        <table>
-                            {% for field in ['firstName', 'lastName', 'phone', 'email', 'settlement', 'warehouse'] %}
-                                <tr>
-                                    <td>{{ form_label(form[field]) }}</td>
-                                    <td>
-                                        {{ form_widget(form[field]) }}
-                                        {{ form_errors(form[field]) }}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </table>
-                        <input type="submit" value="Подтвердить заказ">
-                    {{ form_end(form) }}
-
+                            </div><!-- End .panel -->
+                        </div><!-- End .panel-group #checkout -->
+                    </form>
+                    <div class="xlg-margin"></div><!-- space -->
                 </div><!-- End .col-md-12 -->
             </div><!-- End .row -->
         </div><!-- End .container -->
 
+
+
     </section><!-- End #content -->
 
-    {% endblock %}
+
+
+
+
+    {{ form_start(form, {'attr':{'novalidate': 'novalidate'}}) }}
+    <table>
+        {%  for field in form %}
+            <tr>
+                <td>{{ form_label(field) }}</td>
+                <td>
+                    {{ form_widget(field) }}
+                    {{ form_errors(field) }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <input type="submit" value="Подтвердить заказ">
+    {{ form_end(form) }}
+
+
+
+
+{% endblock %}

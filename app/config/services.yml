@@ -50,5 +50,5 @@ services:
 
     app.carts:
         class: AppBundle\Service\CartService
-        arguments: ['@doctrine', '@session']
+        arguments: ['@doctrine','@session']
         public: true

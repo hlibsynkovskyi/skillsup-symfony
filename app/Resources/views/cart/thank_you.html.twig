@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
-    {% block body %}
+
+{% block body %}
+
 
     <section id="content">
         <div id="breadcrumb-container">
             <div class="container">
                 <ul class="breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active">Shopping Cart</li>
+                    <li><a href="{{ path('homepage') }}">Главная</a></li>
+                    <li class="active">заказ принят</li>
                 </ul>
             </div>
         </div>
@@ -14,7 +16,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <header class="content-title">
-                        <h1 class="title">Спасибо за заказ. Мы обязательно с вами свяжемся.</h1>
+                        <h1 class="title">!!!!!!!!!!!!!! СПАСИБО ЗА ЗАКАЗ !!!!!!!!!!!!!!!!!!!!!!</h1>
+
                     </header>
 
                 </div><!-- End .col-md-12 -->
@@ -23,4 +26,11 @@
 
     </section><!-- End #content -->
 
-    {% endblock %}
+
+
+
+
+
+
+
+{% endblock %}

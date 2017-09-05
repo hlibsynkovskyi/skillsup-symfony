@@ -1,48 +1,59 @@
-{% for product in products %}
-    <div class="col-md-4 col-sm-6 col-xs-12">
-        <div class="item item-hover">
-            <div class="item-image-wrapper">
-                <figure class="item-image-container">
-                    <a href="{{ path('product', {'id': product.id}) }}">
-                        <img src="{{ product.photo }}" alt="item1" class="item-image">
-                    </a>
-                </figure>
-                <div class="item-price-container">
-                    {% if product.discount %}
-                        <span class="old-price">{{ product.price|number_format(2, ',', ' ') }}</span>
-                    {% endif %}
+ {% for product in products %}
 
-                    <span class="item-price">{{ product.discountedPrice|number_format(2, ',', ' ') }}</span>
-                </div><!-- End .item-price-container -->
 
-                {% if product.isNew %}
-                    <span class="new-rect">Новый</span>
-                {% endif %}
 
-                {% if product.discount %}
-                    <span class="discount-rect">-{{ product.discount }}%</span>
-                {% endif %}
-            </div><!-- End .item-image-wrapper -->
-            <div class="item-meta-container">
-                <div class="ratings-container">
-                    <div class="ratings">
-                        <div class="ratings-result" data-result="80" style="width: 75.2px;"></div>
-                    </div><!-- End .ratings -->
-                    <span class="ratings-amount" style="display: none;">
+
+                     <div class="col-md-4 col-sm-6 col-xs-12">
+                         <div class="item item-hover">
+                             <div class="item-image-wrapper">
+                                 <figure class="item-image-container">
+                                     <a href="{{ path('product' , {'id': product.id})}}">
+                                         {% if product.photo %}
+                                             <img src="{{ product.photo }}" alt="item1" class="item-image">
+                                             <img src="{{ product.photo }}" alt="item1  Hover" class="item-image-hover">
+                                         {% endif %}
+                                     </a>
+                                 </figure>
+                                 <div class="item-price-container">
+                                     {% if product.discount %}
+                                     <span class="old-price">{{ product.price |number_format(2,',', ' ')}}</span>
+                                     {% endif %}
+                                     <span class="item-price">{{ product.discountedPrice |number_format(2,',', ' ')}}</span>
+                                 </div><!-- End .item-price-container -->
+
+                                 {% if product.isNew %}
+                                 <span class="new-rect"> Новый </span>
+                                 {% endif %}
+
+                                 {% if product.discount %}
+                                 <span class="discount-rect">-{{ product.discount }}% </span>
+                                 {% endif %}
+
+                             </div><!-- End .item-image-wrapper -->
+                             <div class="item-meta-container">
+                                 <div class="ratings-container">
+                                     <div class="ratings">
+                                         <div class="ratings-result" data-result="80"></div>
+                                     </div><!-- End .ratings -->
+                                     <span class="ratings-amount">
                                                         5 Reviews
                                                     </span>
-                </div><!-- End .rating-container -->
-                <h3 class="item-name"><a href="{{ path('product', {'id': product.id}) }}">{{ product.name }}</a></h3>
-                <div class="item-action">
-                    <a href="{{ path('add_to_cart', {'id': product.id}) }}" class="item-add-btn js-cart-btn">
-                        <span class="icon-cart-text">Add to Cart</span>
-                    </a>
-                    <div class="item-action-inner" style="visibility: hidden; overflow: hidden; padding-left: 0px; width: 0px;">
-                        <a href="#" class="icon-button icon-like">Favourite</a>
-                        <a href="#" class="icon-button icon-compare">Checkout</a>
-                    </div><!-- End .item-action-inner -->
-                </div><!-- End .item-action -->
-            </div><!-- End .item-meta-container -->
-        </div><!-- End .item -->
-    </div><!-- End .col-md-4 -->
-{% endfor %}
+                                 </div><!-- End .rating-container -->
+                                 <h3 class="item-name"><a href="{{ path('product' , {'id': product.id})}}">{{ product.name }}</a></h3>
+                                 <div class="item-action">
+                                     <a href="{{ path('add_to_cart',{'id':product.id}) }}" class="js-cart-btn ">
+                                         <span class="icon-cart-text">Add to Cart</span>
+                                     </a>
+                                     <div class="item-action-inner">
+                                         <a href="#" class="icon-button icon-like">Favourite</a>
+                                         <a href="#" class="icon-button icon-compare">Checkout</a>
+                                     </div><!-- End .item-action-inner -->
+                                 </div><!-- End .item-action -->
+                             </div><!-- End .item-meta-container -->
+                         </div><!-- End .item -->
+                     </div><!-- End .col-md-4 -->
+
+
+
+    {% endfor %}
+

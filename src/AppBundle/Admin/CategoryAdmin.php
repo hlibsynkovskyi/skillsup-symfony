@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: 1
+ * Date: 04.08.2017
+ * Time: 20:40
+ */
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -8,29 +14,28 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class CategoryAdmin extends AbstractAdmin
 {
-	protected function configureFormFields(FormMapper $formMapper)
-	{
-		$formMapper->add('parent');
-		$formMapper->add('name', 'text');
-		$formMapper->add('description');
-		$formMapper->add('photo');
-	}
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper->add('parent');
+        $formMapper->add('name', 'text');
+        $formMapper->add('description');
+        $formMapper->add('photo');
+    }
 
-	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-	{
-		$datagridMapper
-			->add('parent')
-			->add('name')
-			->add('description')
-		;
-	}
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('parent')
+            ->add('name')
+        ->add('description');
 
-	protected function configureListFields(ListMapper $listMapper)
-	{
-		$listMapper
-			->add('parent')
-			->addIdentifier('name')
-			->add('description')
-		;
-	}
+    }
+
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->add('parent')
+            ->addIdentifier('name')
+        ->add('description');
+    }
 }

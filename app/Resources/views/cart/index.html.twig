@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
-    {% block body %}
+
+{% block body %}
+
 
     <section id="content">
         <div id="breadcrumb-container">
             <div class="container">
                 <ul class="breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active">Shopping Cart</li>
+                    <li><a href="{{ path('homepage') }}">Главная</a></li>
+                    <li class="active">Корзина</li>
                 </ul>
             </div>
         </div>
@@ -14,24 +16,21 @@
             <div class="row">
                 <div class="col-md-12">
                     <header class="content-title">
-                        <h1 class="title">Shopping Cart</h1>
-                        <p class="title-desc">Just this week, you can use the free premium delivery.</p>
+                        <h1 class="title">Корзина покупок</h1>
+                        <p class="title-desc">Только сегодня скидываем всю тяжесть цен.</p>
                     </header>
                     <div class="xs-margin"></div><!-- space -->
                     <div class="row">
 
                         <div class="col-md-12 table-responsive">
 
-
-
                             <table class="table cart-table">
                                 <thead>
                                 <tr>
-                                    <th class="table-title">Product Name</th>
-                                    <th class="table-title">Product Code</th>
-                                    <th class="table-title">Unit Price</th>
-                                    <th class="table-title">Quantity</th>
-                                    <th class="table-title">SubTotal</th>
+                                    <th class="table-title">Наименование товара</th>
+                                    <th class="table-title">Стоимость еденицы товара</th>
+                                    <th class="table-title">Количество</th>
+                                    <th class="table-title">Общая стоимость</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -40,32 +39,31 @@
                                 <tr>
                                     <td class="item-name-col">
                                         <figure>
-                                            <a href={{ path('product', {'id':item.product.id}) }}><img src={{ item.product.photo }} alt="Lowlands Lace Blouse"></a>
+                                            <a href="{{ path('product' , {id: item.product.id})}}"><img src="{{ item.product.photo }}" alt="{{ item.product.name }}"></a>
                                         </figure>
-                                        <header class="item-name"><a href="#">{{ item.product.name }}</a></header>
+                                        <header class="item-name"><a href="{{ path('product' , {id: item.product.id})}}">{{ item.product.name }}</a></header>
                                         <ul>
-                                            <li>Color: White</li>
-                                            <li>Size: SM</li>
+                                            <li>Параметры: </li>
+
                                         </ul>
                                     </td>
-                                    <td class="item-code">MP125984154</td>
+
                                     <td class="item-price-col"><span class="item-price-special">{{ item.product.discountedPrice }}</span></td>
                                     <td>
                                         <div class="custom-quantity-input">
-                                            <input type="text" name="quantity" class="js-item-count" data-update-url="{{ path('set_item_count', {'id': item.id}) }}" data-original-value="{{ item.count }}" value="{{ item.count }}">
-                                            <a href="#" onclick="return false;" class="quantity-btn quantity-input-up"><i class="fa fa-angle-up"></i></a>
+                                            <input type="text" name="quantity" class="js-item-count" data-update-url="{{ path('set_item_count',{'id':item.id}) }}" data-original-value="{{ item.count }}" value="{{ item.count }}">
+                                           <a href="#" onclick="return false;" class="quantity-btn quantity-input-up"><i class="fa fa-angle-up"></i></a>
                                             <a href="#" onclick="return false;" class="quantity-btn quantity-input-down"><i class="fa fa-angle-down"></i></a>
+
                                         </div>
                                     </td>
                                     <td class="item-total-col"><span class="item-price-special js-item-cost">{{ item.cost }}</span>
-                                        <a href="#" class="close-button"></a>
+                                        <a href="{{ path('remove_from_cart' , {id: item.id})}}" class="close-button"></a>
                                     </td>
                                 </tr>
                                 {% endfor %}
                                 </tbody>
                             </table>
-
-
 
                         </div><!-- End .col-md-12 -->
 
@@ -77,18 +75,18 @@
 
                             <div class="tab-container left clearfix">
                                 <ul class="nav-tabs">
-                                    <li class="active"><a href="#shipping" data-toggle="tab">Shipping &amp; Taxes</a></li>
-                                    <li><a href="#discount" data-toggle="tab">Discount Code</a></li>
-                                    <li><a href="#gift" data-toggle="tab">Gift voucher </a></li>
+                                    <li class="active"><a href="#shipping" data-toggle="tab">Доставка и налоги</a></li>
+                                    <li><a href="#discount" data-toggle="tab">Код дисконтирования</a></li>
+                                    <li><a href="#gift" data-toggle="tab">Подарочный ваучер </a></li>
 
                                 </ul>
                                 <div class="tab-content clearfix">
                                     <div class="tab-pane active" id="shipping">
 
                                         <form action="#" id="shipping-form">
-                                            <p class="shipping-desc">Enter your destination to get a shipping estimate.</p>
+                                            <p class="shipping-desc">Введите адресс доставки для расчета стоимости.</p>
                                             <div class="form-group">
-                                                <label for="select-country" class="control-label">Country&#42;</label>
+                                                <label for="select-country" class="control-label">Страна&#42;</label>
                                                 <div class="input-container normal-selectbox">
                                                     <select id="select-country" name="select-country" class="selectbox">
                                                         <option  value="Japan">Japan</option>
@@ -101,7 +99,7 @@
                                             </div><!-- End .form-group -->
                                             <div class="xss-margin"></div>
                                             <div class="form-group">
-                                                <label for="select-state" class="control-label">Regison/State&#42;</label>
+                                                <label for="select-state" class="control-label">Регион/Штат&#42;</label>
                                                 <div class="input-container normal-selectbox">
                                                     <select id="select-state" name="select-state" class="selectbox">
                                                         <option  value="California">California</option>
@@ -114,7 +112,7 @@
                                             </div><!-- End .form-group -->
                                             <div class="xss-margin"></div>
                                             <div class="form-group">
-                                                <label for="select-country" class="control-label"  >Post Code&#42;</label>
+                                                <label for="select-country" class="control-label"  >Почтовый код&#42;</label>
                                                 <div class="input-container">
                                                     <input type="text" required class="form-control" placeholder="Your fax">
                                                 </div>
@@ -128,7 +126,7 @@
                                     </div><!-- End .tab-pane -->
 
                                     <div class="tab-pane" id="discount">
-                                        <p>Enter your discount coupon code here.</p>
+                                        <p>Введите ваш код скидочного купона тут.</p>
                                         <form action="#">
                                             <div class="input-group">
                                                 <input type="text" required class="form-control" placeholder="Coupon code">
@@ -152,33 +150,251 @@
                             <table class="table total-table">
                                 <tbody>
                                 <tr>
-                                    <td class="total-table-title">Общее количество:</td>
+                                    <td class="total-table-title js-cart-count">Стоимость товара:</td>
+                                    <td class="js-cart-count">{{ cart.cost }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="total-table-title">Стоимость доставки:</td>
+                                    <td>$0.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="total-table-title js-cart-count">Общее количество товара:</td>
                                     <td class="js-cart-count">{{ cart.count }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="total-table-title">Subtotal:</td>
-                                    <td class="js-cart-cost">{{ cart.cost }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="total-table-title">Shipping:</td>
-                                    <td>$6.00</td>
                                 </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td>Всего:</td>
-                                    <td class="js-cart-cost">{{ cart.cost }}</td>
+                                    <td>Стоимость всего:</td>
+                                    <td>{{ cart.cost }}</td>
                                 </tr>
                                 </tfoot>
                             </table>
                             <div class="md-margin"></div><!-- End .space -->
                             <a href="#" class="btn btn-custom-2">CONTINUE SHOPPING</a>
-                            <a href="#" class="btn btn-custom">CHECKOUT</a>
+                            <a href="{{ path('make_order' , {id: cart.id})}}" class="btn btn-custom">CHECKOUT</a>
                         </div><!-- End .col-md-4 -->
                     </div><!-- End .row -->
                     <div class="md-margin2x"></div><!-- Space -->
 
+                    <div class="similiar-items-container carousel-wrapper">
+                        <header class="content-title">
+                            <div class="title-bg">
+                                <h2 class="title">Similiar Products</h2>
+                            </div><!-- End .title-bg -->
+                            <p class="title-desc">Note the similar products - after buying for more than $500 you can get a discount.</p>
+                        </header>
 
+                        <div class="carousel-controls">
+                            <div id="similiar-items-slider-prev" class="carousel-btn carousel-btn-prev"></div><!-- End .carousel-prev -->
+                            <div id="similiar-items-slider-next" class="carousel-btn carousel-btn-next carousel-space"></div><!-- End .carousel-next -->
+                        </div><!-- End .carousel-controls -->
+                        <div class="similiar-items-slider owl-carousel">
+                            <div class="item item-hover">
+                                <div class="item-image-wrapper">
+                                    <figure class="item-image-container">
+                                        <a href="product.html">
+                                            <img src="images/products/item3.jpg" alt="item1" class="item-image">
+                                            <img src="images/products/item3-hover.jpg" alt="item1  Hover" class="item-image-hover">
+                                        </a>
+                                    </figure>
+                                    <div class="item-price-container">
+                                        <span class="item-price">$160<span class="sub-price">.99</span></span>
+                                    </div><!-- End .item-price-container -->
+                                    <span class="new-rect">New</span>
+                                </div><!-- End .item-image-wrapper -->
+                                <div class="item-meta-container">
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="ratings-result" data-result="80"></div>
+                                        </div><!-- End .ratings -->
+                                        <span class="ratings-amount">
+                                                    5 Reviews
+                                                </span>
+                                    </div><!-- End .rating-container -->
+                                    <h3 class="item-name"><a href="product.html">Phasellus consequat</a></h3>
+                                    <div class="item-action">
+                                        <a href="#" class="item-add-btn">
+                                            <span class="icon-cart-text">Add to Cart</span>
+                                        </a>
+                                        <div class="item-action-inner">
+                                            <a href="#" class="icon-button icon-like">Favourite</a>
+                                            <a href="#" class="icon-button icon-compare">Checkout</a>
+                                        </div><!-- End .item-action-inner -->
+                                    </div><!-- End .item-action -->
+                                </div><!-- End .item-meta-container -->
+                            </div><!-- End .item -->
+
+                            <div class="item item-hover">
+                                <div class="item-image-wrapper">
+                                    <figure class="item-image-container">
+                                        <a href="product.html">
+                                            <img src="images/products/item1.jpg" alt="item1" class="item-image">
+                                            <img src="images/products/item1-hover.jpg" alt="item1  Hover" class="item-image-hover">
+                                        </a>
+                                    </figure>
+                                    <div class="item-price-container">
+                                        <span class="item-price">$100</span>
+                                    </div><!-- End .item-price-container -->
+                                </div><!-- End .item-image-wrapper -->
+                                <div class="item-meta-container">
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="ratings-result" data-result="99"></div>
+                                        </div><!-- End .ratings -->
+                                        <span class="ratings-amount">
+                                                    4 Reviews
+                                                </span>
+                                    </div><!-- End .rating-container -->
+                                    <h3 class="item-name"><a href="product.html">Phasellus consequat</a></h3>
+                                    <div class="item-action">
+                                        <a href="#" class="item-add-btn">
+                                            <span class="icon-cart-text">Add to Cart</span>
+                                        </a>
+                                        <div class="item-action-inner">
+                                            <a href="#" class="icon-button icon-like">Favourite</a>
+                                            <a href="#" class="icon-button icon-compare">Checkout</a>
+                                        </div><!-- End .item-action-inner -->
+                                    </div><!-- End .item-action -->
+                                </div><!-- End .item-meta-container -->
+                            </div><!-- End .item -->
+
+                            <div class="item item-hover">
+                                <div class="item-image-wrapper">
+                                    <figure class="item-image-container">
+                                        <a href="product.html">
+                                            <img src="images/products/item4.jpg" alt="item1" class="item-image">
+                                            <img src="images/products/item4-hover.jpg" alt="item1  Hover" class="item-image-hover">
+                                        </a>
+                                    </figure>
+                                    <div class="item-price-container">
+                                        <span class="old-price">$100</span>
+                                        <span class="item-price">$80</span>
+                                    </div><!-- End .item-price-container -->
+                                    <span class="discount-rect">-20%</span>
+                                </div><!-- End .item-image-wrapper -->
+                                <div class="item-meta-container">
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="ratings-result" data-result="75"></div>
+                                        </div><!-- End .ratings -->
+                                        <span class="ratings-amount">
+                                                    2 Reviews
+                                                </span>
+                                    </div><!-- End .rating-container -->
+                                    <h3 class="item-name"><a href="product.html">Phasellus consequat</a></h3>
+                                    <div class="item-action">
+                                        <a href="#" class="item-add-btn">
+                                            <span class="icon-cart-text">Add to Cart</span>
+                                        </a>
+                                        <div class="item-action-inner">
+                                            <a href="#" class="icon-button icon-like">Favourite</a>
+                                            <a href="#" class="icon-button icon-compare">Checkout</a>
+                                        </div><!-- End .item-action-inner -->
+                                    </div><!-- End .item-action -->
+                                </div><!-- End .item-meta-container -->
+                            </div><!-- End .item -->
+
+                            <div class="item item-hover">
+                                <div class="item-image-wrapper">
+                                    <figure class="item-image-container">
+                                        <a href="product.html">
+                                            <img src="images/products/item10.jpg" alt="item1" class="item-image">
+                                            <img src="images/products/item10-hover.jpg" alt="item1  Hover" class="item-image-hover">
+                                        </a>
+                                    </figure>
+                                    <div class="item-price-container">
+                                        <span class="old-price">$120</span>
+                                        <span class="item-price">$60</span>
+                                    </div><!-- End .item-price-container -->
+                                    <span class="discount-rect">-50%</span>
+                                </div><!-- End .item-image-wrapper -->
+                                <div class="item-meta-container">
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="ratings-result" data-result="65"></div>
+                                        </div><!-- End .ratings -->
+                                        <span class="ratings-amount">
+                                                    4 Reviews
+                                                </span>
+                                    </div><!-- End .rating-container -->
+                                    <h3 class="item-name"><a href="product.html">Phasellus consequat</a></h3>
+                                    <div class="item-action">
+                                        <a href="#" class="item-add-btn">
+                                            <span class="icon-cart-text">Add to Cart</span>
+                                        </a>
+                                        <div class="item-action-inner">
+                                            <a href="#" class="icon-button icon-like">Favourite</a>
+                                            <a href="#" class="icon-button icon-compare">Checkout</a>
+                                        </div><!-- End .item-action-inner -->
+                                    </div><!-- End .item-action -->
+                                </div><!-- End .item-meta-container -->
+                            </div><!-- End .item -->
+
+                            <div class="item item-hover">
+                                <div class="item-image-wrapper">
+                                    <figure class="item-image-container">
+                                        <a href="product.html">
+                                            <img src="images/products/item5.jpg" alt="item1" class="item-image">
+                                            <img src="images/products/item5-hover.jpg" alt="item1  Hover" class="item-image-hover">
+                                        </a>
+                                    </figure>
+                                    <div class="item-price-container">
+                                        <span class="item-price">$99</span>
+                                    </div><!-- End .item-price-container -->
+                                    <span class="new-rect">New</span>
+                                </div><!-- End .item-image-wrapper -->
+                                <div class="item-meta-container">
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="ratings-result" data-result="40"></div>
+                                        </div><!-- End .ratings -->
+                                        <span class="ratings-amount">
+                                                    3 Reviews
+                                                </span>
+                                    </div><!-- End .rating-container -->
+                                    <h3 class="item-name"><a href="product.html">Phasellus consequat</a></h3>
+                                    <div class="item-action">
+                                        <a href="#" class="item-add-btn">
+                                            <span class="icon-cart-text">Add to Cart</span>
+                                        </a>
+                                        <div class="item-action-inner">
+                                            <a href="#" class="icon-button icon-like">Favourite</a>
+                                            <a href="#" class="icon-button icon-compare">Checkout</a>
+                                        </div><!-- End .item-action-inner -->
+                                    </div><!-- End .item-action -->
+                                </div><!-- End .item-meta-container -->
+                            </div><!-- End .item -->
+
+                            <div class="item item-hover">
+                                <div class="item-image-wrapper">
+                                    <figure class="item-image-container">
+                                        <a href="product.html">
+                                            <img src="images/products/item7.jpg" alt="item1" class="item-image">
+                                            <img src="images/products/item7-hover.jpg" alt="item1  Hover" class="item-image-hover">
+                                        </a>
+                                    </figure>
+                                    <div class="item-price-container">
+                                        <span class="item-price">$280</span>
+                                    </div><!-- End .item-price-container -->
+                                </div><!-- End .item-image-wrapper -->
+                                <div class="item-meta-container">
+                                    <div class="ratings-container">
+                                    </div><!-- End .rating-container -->
+                                    <h3 class="item-name"><a href="product.html">Phasellus consequat</a></h3>
+                                    <div class="item-action">
+                                        <a href="#" class="item-add-btn">
+                                            <span class="icon-cart-text">Add to Cart</span>
+                                        </a>
+                                        <div class="item-action-inner">
+                                            <a href="#" class="icon-button icon-like">Favourite</a>
+                                            <a href="#" class="icon-button icon-compare">Checkout</a>
+                                        </div><!-- End .item-action-inner -->
+                                    </div><!-- End .item-action -->
+                                </div><!-- End .item-meta-container -->
+                            </div><!-- End .item -->
+
+                        </div><!--purchased-items-slider -->
+                    </div><!-- End .purchased-items-container -->
 
                 </div><!-- End .col-md-12 -->
             </div><!-- End .row -->
@@ -186,4 +402,35 @@
 
     </section><!-- End #content -->
 
-    {% endblock %}
+
+
+
+
+
+
+
+    <table>
+        <tr>
+            <th> товар </th>
+            <th> цена</th>
+            <th> Количество</th>
+            <th> Стоимость</th>
+        </tr>
+
+        {%  for item in cart.items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.product.discountedPrice }}</td>
+                <td>{{ item.count }}</td>
+                <td>{{ item.count * item.product.discountedPrice }}</td>
+            </tr>
+        {%  endfor %}
+        <tr>
+            <th colspan="2"> Всего</th>
+            <th>{{ cart.count }}</th>
+            <th>{{ cart.cost }}</th>
+        </tr>
+    </table>
+
+
+{% endblock %}

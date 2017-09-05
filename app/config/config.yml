@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi: ~
-    translator: { fallbacks: ['ru'] }
+    translator: { fallbacks: ["ru"] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -38,7 +38,8 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        nova_poshta_api_key: '%nova_poshta_api_key%'
+        nov_poshta_api_key: '%nov_poshta_api_key%'
+
 
 # Doctrine Configuration
 doctrine:
@@ -70,6 +71,7 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+# app/config/config.yml
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main

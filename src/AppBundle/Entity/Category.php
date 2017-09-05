@@ -1,72 +1,66 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: 1
+ * Date: 14.07.2017
+ * Time: 19:38
+ */
 
 namespace AppBundle\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Intl\Data\Util\ArrayAccessibleResourceBundle;
-
 /**
  * Class Category
- *
- * @ORM\Entity()
- * @ORM\Table(name="categories")
- */
+*
+* @ORM\Entity()
+* @ORM\Table(name="categories")
+*/
 class Category
 {
+    /**
+     * @var integer
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	protected $id;
+    /**
+     * @var Category
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="subcategories")
+     * @ORM\JoinColumn(name="parent_id", onDelete="CASCADE")
+     */
+    protected $parent;
 
-	/**
-	 * @var Category
-	 *
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="subcategories")
-	 * @ORM\JoinColumn(name="parent_id", onDelete="CASCADE")
-	 */
-	protected $parent;
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Category", mappedBy="parent")
+     */
+    protected $subcategories;
 
-	/**
-	 * @var ArrayCollection
-	 *
-	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\Category", mappedBy="parent")
-	 */
-	protected $subcategories;
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=250)
+     */
+    protected $name;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=250)
-	 */
-	protected $name;
+    /**
+     * @var string
+     * @ORM\Column(type="text")
+     */
+    protected $description;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="text")
-	 */
-	protected $description;
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    protected $photo;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=250, nullable=true)
-	 */
-	protected $photo;
-
-	/**
-	 * @var ArrayCollection
-	 *
-	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="category")
-	 */
-	protected $products;
-
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="category")
+     */
+    protected $products;
     /**
      * Constructor
      */
@@ -250,27 +244,27 @@ class Category
         return $this->products;
     }
 
-	/**
-	 * Returns parents in reverse order for breadcrumbs
-	 *
-	 * @return Category[]
-	 */
+
+    /**
+     * @return Category[]
+     *
+     */
     public function getParents()
-	{
-		$parents = [];
-		$parent = $this->getParent();
+    {
+      $parents= [];
+      $currentNode= $this;
 
-		while ( $parent ) {
-			$parents[] = $parent;
-			$parent = $parent->getParent();
-		}
+      while($parent=$currentNode->getParent()){
+          $parents[]=$parent;
+          $currentNode = $parent;
+      }
 
-		return array_reverse($parents);
-	}
+     return array_reverse($parents);
+    }
 
-	public function __toString()
-	{
-		return $this->name;
-	}
+    public function __toString()
+    {
+       return $this->name;
+    }
 
 }

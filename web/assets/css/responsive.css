@@ -207,13 +207,11 @@
 	}
 
 	.sidebar h3 {
-		font-size:17px;
-		padding-left:20px;
+		font-size:25px;
 	}
 	
 	.sidebarslider .flex-direction-nav {
-		top:-55px;
-		right:10px;
+		top:-48.5px;
 		width:74px;
 		height:25px;
 	}
@@ -319,20 +317,6 @@
 	.hero-unit p {
 		font-size:18px;
 		line-height: 26px;
-	}
-
-	.banner-hero h2 {
-		font-size:36px;
-	}
-
-	.banner-hero h3 {
-		font-size:28px;
-	}
-
-	.banner-hero p {
-		max-width:400px;
-		font-size:15px;
-		margin-bottom:10px;
 	}
 	
 	#testimonials-section h3 {
@@ -660,13 +644,7 @@
  
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
-
- 	#slider-rev-container {
- 		position: absolute;
- 		top:0;
- 		left:0;
- 	}
-
+ 	
 	.home-banners a {
 		margin-right:auto;
 		margin-left:auto;
@@ -696,25 +674,6 @@
 	.hero-unit p {
 		font-size:16px;
 		line-height:22px;
-	}
-
-	.banner-hero h2 {
-		font-size:32px;
-	}
-
-	.banner-hero h3 {
-		font-size:26px;
-	}
-
-	.banner-hero p {
-		max-width:360px;
-		font-size:15px;
-		margin-bottom:10px;
-	}
-
-	.banner-hero .btn {
-		padding:6px 15px;
-		font-size:12px;
 	}
 
 	#testimonials-section h3 {
@@ -757,7 +716,7 @@
 	.header5 .dropdown-language {
 		margin-left:5px;
 	}
-	
+
 	#inner-header .header-box {
  		display:none;
  	}
@@ -1088,7 +1047,7 @@
 		margin-top:30.5px;
 		display:block;
 	}
- 	
+
  	.logo {
 		text-align:center;
 
@@ -1397,7 +1356,7 @@
 		position: absolute;
 		top:40px;
 		right:15px;
-		margin-right:0;
+		margin-right: 0;
 	}
 
 	#category-header {
@@ -1613,17 +1572,6 @@ only screen and (min-device-pixel-ratio: 1.5) {
 		-webkit-background-size:6px 6px;
 	}
 
-	.filter-icon {
-		background-image: url(../images/sprites/category-filter-icons@2x.png);
-		background-size:100px 50px;
-		-webkit-background-size:100px 50px;
-	}
-
-	.services-slider .service-icon {
-		background-image: url(../images/sprites/service-icons@2x.png);
-		background-size:496px 248px;
-		-webkit-background-size:496px 248px;
-	}
 	/* Custom selectbox retina*/
 	.sbToggle {
 		background-image: url(../images/sprites/selectbox@2x.png);
@@ -1636,5 +1584,5 @@ only screen and (min-device-pixel-ratio: 1.5) {
 		background-size:94px 47px;
 		-webkit-background-size:94px 47px;
 	}
-	
+
 }

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: 1
+ * Date: 08.08.2017
+ * Time: 19:48
+ */
 
 namespace AppBundle\Entity;
 
@@ -6,45 +12,42 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Cart Item
- *
  * @ORM\Entity()
  * @ORM\Table(name="cart_items")
  */
 class CartItem
 {
+    /**
+     * @var integer
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	protected $id;
+    /**
+    * @var Cart
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Cart" ,inversedBy="items")
+     * @ORM\JoinColumn(name="cart_id", onDelete="CASCADE")
+     *
+     */
+    protected $cart;
 
-	/**
-	 * @var Cart
-	 *
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Cart", inversedBy="items")
-	 * @ORM\JoinColumn(name="cart_id", onDelete="CASCADE")
-	 */
-	protected $cart;
 
-	/**
-	 * @var Product
-	 *
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product", inversedBy="cartItems")
-	 * @ORM\JoinColumn(name="product_id", onDelete="CASCADE")
-	 */
-	protected $product;
+    /**
+     * @var Product
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product" ,inversedBy="cartItems")
+     * @ORM\JoinColumn(name="product_id", onDelete="CASCADE")
+     *
+     */
+    protected $product;
 
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(type="integer")
-	 */
-	protected $count;
-
+    /**
+     * @var integer
+     * @ORM\Column(type="integer")
+     */
+    protected $count;
 
     /**
      * Get id
@@ -128,14 +131,13 @@ class CartItem
         return $this->product;
     }
 
-	/**
-	 * Get item cost
-	 *
-	 * @return float
-	 */
+    /**
+     * Get item cost
+     *
+     */
     public function getCost()
-	{
-		return $this->count * $this->product->getDiscountedPrice();
-	}
+    {
+        return $this->count*$this->product->getDiscountedPrice();
+    }
 
 }

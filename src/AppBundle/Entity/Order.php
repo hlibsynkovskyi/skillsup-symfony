@@ -1,108 +1,108 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: 1
+ * Date: 08.08.2017
+ * Time: 19:21
+ */
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Order
- *
+ * Class Cart
  * @ORM\Entity()
  * @ORM\Table(name="orders")
  */
 class Order
 {
 
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Id
-	 * @ORM\Column(type="integer")
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	protected $id;
-
-	/**
-	 * @var Cart
-	 *
-	 * @ORM\OneToOne(targetEntity="AppBundle\Entity\Cart", inversedBy="order")
-	 * @ORM\JoinColumn(name="cart_id", onDelete="CASCADE")
-	 */
-	protected $cart;
-
-	/**
-	 * @var User
-	 *
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="orders")
-	 * @ORM\JoinColumn(name="user_id", onDelete="CASCADE")
-	 */
-	protected $user;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=255)
-	 *
-	 * @Assert\NotBlank()
-	 */
-	protected $firstName;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=255)
-	 *
-	 * @Assert\NotBlank()
-	 */
-	protected $lastName;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=255)
-	 *
-	 * @Assert\NotBlank()
-	 */
-	protected $phone;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=255)
-	 *
-	 * @Assert\NotBlank()
-	 * @Assert\Email(
-	 *     message = "Неверный адрес - '{{ value }}'.",
-	 *     checkMX = true
-	 * )
-	 */
-	protected $email;
-
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="text")
-	 */
-	protected $address;
-
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=36)
-     *
-     * @Assert\NotBlank()
+     * @var integer
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-	protected $settlement;
+    protected $id;
+
+    /**
+     * @var Cart
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Cart" ,inversedBy="order")
+     * @ORM\JoinColumn(name="cart_id", onDelete="CASCADE")
+     *
+     */
+    protected $cart;
+
+
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User" ,inversedBy="orders")
+     * @ORM\JoinColumn(name="user_id", onDelete="CASCADE")
+     *
+     */
+    protected $user;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=36)
-     *
+     * @ORM\Column(type="string" , length=255)
      * @Assert\NotBlank()
+     *
+     */
+    protected $firstname;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string" , length=255)
+   * @Assert\NotBlank()
+     *
+     */
+    protected $lastname;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string" , length=255)
+     *  @Assert\NotBlank()
+     *
+     */
+    protected $phone;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string" , length=255)
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     * message = "неверный майл адресс - '{{ value }}'.",
+     * checkMX = true
+     *     )
+     */
+    protected $email;
+
+    /**
+     * @var string
+     * @ORM\Column(type="text" )
+     *
+     */
+    protected $address;
+
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=50 )
+     * @Assert\NotBlank()
+     *
+     */
+    protected $settlment;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=50 )
+     * @Assert\NotBlank()
+     *
      */
     protected $warehouse;
+
 
     /**
      * Get id
@@ -115,51 +115,51 @@ class Order
     }
 
     /**
-     * Set firstName
+     * Set firstname
      *
-     * @param string $firstName
+     * @param string $firstname
      *
      * @return Order
      */
-    public function setFirstName($firstName)
+    public function setFirstname($firstname)
     {
-        $this->firstName = $firstName;
+        $this->firstname = $firstname;
 
         return $this;
     }
 
     /**
-     * Get firstName
+     * Get firstname
      *
      * @return string
      */
-    public function getFirstName()
+    public function getFirstname()
     {
-        return $this->firstName;
+        return $this->firstname;
     }
 
     /**
-     * Set lastName
+     * Set lastname
      *
-     * @param string $lastName
+     * @param string $lastname
      *
      * @return Order
      */
-    public function setLastName($lastName)
+    public function setLastname($lastname)
     {
-        $this->lastName = $lastName;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
     /**
-     * Get lastName
+     * Get lastname
      *
      * @return string
      */
-    public function getLastName()
+    public function getLastname()
     {
-        return $this->lastName;
+        return $this->lastname;
     }
 
     /**
@@ -283,27 +283,27 @@ class Order
     }
 
     /**
-     * Set settlement
+     * Set settlment
      *
-     * @param string $settlement
+     * @param string $settlment
      *
      * @return Order
      */
-    public function setSettlement($settlement)
+    public function setSettlment($settlment)
     {
-        $this->settlement = $settlement;
+        $this->settlment = $settlment;
 
         return $this;
     }
 
     /**
-     * Get settlement
+     * Get settlment
      *
      * @return string
      */
-    public function getSettlement()
+    public function getSettlment()
     {
-        return $this->settlement;
+        return $this->settlment;
     }
 
     /**
