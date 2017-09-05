@@ -1,0 +1,17 @@
+    {% for category in categories %}
+        <p>
+            <a href="{{ path('category',{'id': category.id}) }}">
+                {{ category.name }}
+                {% if category.photo %}
+                    <img style="width: 200px" src="{{ category.photo }}">
+                {% endif %}
+            </a>
+        </p>
+        {% for subcategory in category.subcategories %}
+            <p> ---Категория:{{ subcategory.name }}---
+                {% if subcategory.photo %}
+                    <img style="width: 300px" src="{{ subcategory.photo }}">
+                {% endif %}
+            </p>
+        {% endfor %}
+    {% endfor %}
