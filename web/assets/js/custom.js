@@ -7,14 +7,33 @@ $(function() {
 
    $('.js-item-count').on('change', function (event) {
        var $me = $(this);
+       var value = parseInt($me.val());
 
-       $.post($me.data('update-url'), {count: $me.val()}, function(data, status) {
+       if (isNaN(value) || value <= 0) {
+           value = 1;
+           $me.val(value);
+       }
+
+       $.post($me.data('update-url'), {count: value}, function(data, status) {
            $me.closest('tr').find('.js-item-cost').html(data.itemCost);
            $('.js-cart-cost').html(data.cartCost);
            $('.js-cart-count').html(data.cartCount);
        })
    });
 
+   $('.js-quantity-arrow').on('click', function (event) {
+       event.preventDefault();
+       var $inp = $(this).parent().find('input');
+       var value = parseInt($inp.val());
+       var step = parseInt($(this).data('step'));
+
+       value = value + step;
+
+       $inp.val(value);
+       $inp.change();
+   });
+
+   // -----------------------------API Новая Почта------------------------------
    $('#order_settlement').select2({
        ajax: {
            url: 'http://api.novaposhta.ua/v2.0/json/Address/searchSettlements/',
@@ -71,7 +90,7 @@ $(function() {
    });
 
    // Cтавим обработчик события change на селект с городом, чтобы загрузить список отделений
-    $('#order_settlement').on('change', function () {
+   $('#order_settlement').on('change', function () {
         // Готовим данные для запроса к НП.
         var request = {
             "apiKey": NOVA_POSHTA_API_KEY,
@@ -115,4 +134,5 @@ $(function() {
             }
         });
     });
+   // --------------------------Конец API Новая Почта---------------------------
 });

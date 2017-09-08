@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="test">
+    <serverData>
+      <paths name="test">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/var/cache" />
+            <excludedPath local="true" path="$PROJECT_DIR$/var/logs" />
+            <excludedPath local="true" path="$PROJECT_DIR$/var/sessions" />
+            <excludedPath local="true" path="$PROJECT_DIR$/app/config/parameters.yml" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
