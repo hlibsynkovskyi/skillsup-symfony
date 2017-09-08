@@ -116,4 +116,21 @@ $(function () {
             }
         });
     });
+
+    $('.js-quantity-arrow').on('click', function (event) {
+        event.preventDefault();
+
+        var $inp = $(this).parent().find('input');
+        var value = parseInt($inp.val());
+        var step = parseInt($(this).data('step'));
+
+        value = value + step;
+
+        if (value <= 0) {
+            value = 1;
+        }
+
+        $inp.val(value);
+        $inp.change();
+    });
 });
