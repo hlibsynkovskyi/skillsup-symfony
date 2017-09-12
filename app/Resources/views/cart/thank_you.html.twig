@@ -17,6 +17,19 @@
                         <h1 class="title">Спасибо за заказ. Мы обязательно с вами свяжемся.</h1>
                     </header>
 
+                    <form method="POST" action="https://api.privatbank.ua/p24api/ishop">
+                        <input type="hidden" name="amt" value="50" />
+                        <input type="hidden" name="ccy" value="UAH" />
+                        <input type="hidden" name="merchant" value="129911" />
+                        <input type="hidden" name="order" value="12334" />
+                        <input type="hidden" name="details" value="Оплата на сайте Test (skillsup)" />
+                        <input type="hidden" name="ext_details" value="Описание товара №..." />
+                        <input type="hidden" name="pay_way" value="privat24" />
+                        <input type="hidden" name="return_url" value="{{ url('checkout_success') }}" />
+                        <input type="hidden" name="server_url" value="{{ url('checkout_response') }}" />
+                        <button type="submit"><img src="img/buttons/api_logo_1.jpg" border="0" /></button>
+                    </form>
+
                 </div><!-- End .col-md-12 -->
             </div><!-- End .row -->
         </div><!-- End .container -->

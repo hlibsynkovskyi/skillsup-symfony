@@ -53,8 +53,8 @@
                                     <td>
                                         <div class="custom-quantity-input">
                                             <input type="text" name="quantity" class="js-item-count" data-update-url="{{ path('set_item_count', {'id': item.id}) }}" data-original-value="{{ item.count }}" value="{{ item.count }}">
-                                            <a href="#" onclick="return false;" class="quantity-btn quantity-input-up"><i class="fa fa-angle-up"></i></a>
-                                            <a href="#" onclick="return false;" class="quantity-btn quantity-input-down"><i class="fa fa-angle-down"></i></a>
+                                            <a href="#"  class="quantity-btn quantity-input-up js-quantity-arrow" data-step="1"><i class="fa fa-angle-up"></i></a>
+                                            <a href="#" class="quantity-btn quantity-input-down js-quantity-arrow" data-step="-1"><i class="fa fa-angle-down"></i></a>
                                         </div>
                                     </td>
                                     <td class="item-total-col"><span class="item-price-special js-item-cost">{{ item.cost }}</span>

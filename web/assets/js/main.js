@@ -461,7 +461,7 @@
 			});
 			
 			
-			// Checkout Collapse//Accordion
+			// checkout Collapse//Accordion
 			$('.accordion-btn').on('click', function() {
 				var $this = $(this),
 					targetAcc = $this.data('target');
