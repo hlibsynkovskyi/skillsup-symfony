@@ -7,8 +7,14 @@ $(function () {
 
     $('.js-item-count').on('change', function () {
         var $me = $(this);
+        var value = parseInt($me.val());
 
-        $.post($me.data('update-url'), {count: $me.val()}, function (data, status) {
+        if (isNaN(value) || value <= 0) {
+            value = 1;
+            $me.val(value);
+        }
+
+        $.post($me.data('update-url'), {count: value}, function (data, status) {
             $me.closest('tr').find('.js-item-cost').html(data.itemCost);
             $('.js-cart-cost').html(data.cartCost);
             $('.js-cart-count').html(data.cartCount);
@@ -125,10 +131,6 @@ $(function () {
         var step = parseInt($(this).data('step'));
 
         value = value + step;
-
-        if (value <= 0) {
-            value = 1;
-        }
 
         $inp.val(value);
         $inp.change();
