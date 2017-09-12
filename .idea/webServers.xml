@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="cdd8b1e9-52ff-4599-9f39-04d358b057a3" name="test" url="http://fyk.skillsup.itworks-soft.com ">
-        <fileTransfer host="fyk.skillsup.itworks-soft.com" port="21">
+        <fileTransfer host="fyk.skillsup.itworks-soft.com" port="21" rootFolder="/web/fyk.skillsup.itworks-soft.com/public_html">
           <advancedOptions>
             <advancedOptions controlEncoding="utf-8" dataProtectionLevel="Private" passiveMode="true" />
           </advancedOptions>
