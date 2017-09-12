@@ -177,7 +177,7 @@
 
                     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                     <table>
-                        {% for field in ['firstName', 'lastName', 'phone', 'email', 'settlement', 'warehouse'] %}
+                        {% for field in ['firstName', 'lastName', 'phone', 'email'] %}
                         <tr>
                             <td>{{ form_label(form[field]) }}</td>
                             <td>
