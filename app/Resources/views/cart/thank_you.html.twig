@@ -25,8 +25,8 @@
                         <input type="hidden" name="details" value="Оплата на тестовом сайте" />
                         <input type="hidden" name="ext_details" value="Описание товара №12345" />
                         <input type="hidden" name="pay_way" value="privat24" />
-                        <input type="hidden" name="return_url" value="{{ path('checkout_success') }}" />
-                        <input type="hidden" name="server_url" value="{{ path('checkout_response') }}" />
+                        <input type="hidden" name="return_url" value="{{ url('checkout_success') }}" />
+                        <input type="hidden" name="server_url" value="{{ url('checkout_response') }}" />
                         <button type="submit">Оплатить</button>
                     </form>
 
