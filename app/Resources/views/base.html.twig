@@ -48,8 +48,8 @@
                                 <ul id="top-links" class="clearfix">
                                     <li><a href="#" title="My Wishlist"><span class="top-icon top-icon-pencil"></span><span class="hide-for-xs">My Wishlist</span></a></li>
                                     <li><a href="#" title="My Account"><span class="top-icon top-icon-user"></span><span class="hide-for-xs">My Account</span></a></li>
-                                    <li><a href="cart.html" title="My Cart"><span class="top-icon top-icon-cart"></span><span class="hide-for-xs">My Cart</span></a></li>
-                                    <li><a href="checkout.html" title="Checkout"><span class="top-icon top-icon-check"></span><span class="hide-for-xs">Checkout</span></a></li>
+                                    <li><a href="{{ path('cart') }}" title="My Cart"><span class="top-icon top-icon-cart"></span><span class="hide-for-xs">My Cart</span></a></li>
+                                    <li><a href="{{ path('make_order') }}" title="Checkout"><span class="top-icon top-icon-check"></span><span class="hide-for-xs">Checkout</span></a></li>
                                 </ul>
                             </div><!-- End .header-top-left -->
                             <div class="header-top-right">
@@ -79,7 +79,7 @@
                                 </div><!-- End .header-top-dropdowns -->
 
                                 <div class="header-text-container pull-right">
-                                    <p class="header-text">Welcome to Venedor!</p>
+                                    <p class="header-text">Добро пожаловать в Магазин!</p>
 
                                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                         Добро пожаловать, {{ app.user.username }}
@@ -103,7 +103,7 @@
                         <div class="col-md-3 col-sm-3 col-xs-12 logo-container">
                             <h1 class="logo clearfix">
                                 <span>Responsive eCommerce Template</span>
-                                <a href="index.html" title="Venedor eCommerce Template"><img src="{{ asset('assets/images/logo6.png') }}" alt="Venedor Commerce Template" width="200" height="54"></a>
+                                <a href="/" title="Venedor eCommerce Template"><img src="{{ asset('assets/images/logo6.png') }}" alt="Venedor Commerce Template" width="200" height="54"></a>
                             </h1>
                         </div><!-- End .col-md-3 -->
                         <div class="col-md-9 col-sm-9 col-xs-12 header-inner-right">
