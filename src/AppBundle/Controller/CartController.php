@@ -126,6 +126,8 @@ class CartController extends Controller
 
 	/**
 	 * @Route("/thanks-for-order/{id}", name="thanks_for_order")
+     *
+     * @param Order $order
 	 *
 	 * @return Response
 	 */
