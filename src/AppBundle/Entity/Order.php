@@ -91,7 +91,7 @@ class Order
      *
      * @ORM\Column(type="string", length=36)
      *
-     * @Assert\NotBlank()
+     * @ Assert\NotBlank()
      */
 	protected $settlement;
 
@@ -100,9 +100,16 @@ class Order
      *
      * @ORM\Column(type="string", length=36)
      *
-     * @Assert\NotBlank()
+     * @ Assert\NotBlank()
      */
     protected $warehouse;
+
+    public function __construct()
+    {
+        $this->address = '';
+        $this->settlement = '';
+        $this->warehouse = '';
+    }
 
     /**
      * Get id

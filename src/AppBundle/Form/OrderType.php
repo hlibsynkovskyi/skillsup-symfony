@@ -19,8 +19,8 @@ class OrderType extends AbstractType
 			->add('lastName')
 			->add('phone')
 			->add('email', EmailType::class)
-            ->add('settlement', ChoiceType::class)
-            ->add('warehouse', ChoiceType::class)
+//            ->add('settlement', ChoiceType::class)
+//            ->add('warehouse', ChoiceType::class)
 		;
 	}
 
