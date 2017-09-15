@@ -115,7 +115,7 @@ class CartController extends Controller
 		if ($form->isSubmitted() && $form->isValid()) { // Была ли отправлена форма и валидна ли она
 			$carts->saveOrder($order); // Сохраняем заказ
 
-			return $this->redirectToRoute('thanks_for_order'); // Пересылка на страницу с сообщением об успешном заказе
+			return $this->redirectToRoute('thanks_for_order', ['id' => $order->getId()]); // Пересылка на страницу с сообщением об успешном заказе
 		}
 
 		return $this->render('cart/order.html.twig', [ // отображаем шаблон
@@ -125,13 +125,13 @@ class CartController extends Controller
 	}
 
 	/**
-	 * @Route("/thanks-for-order", name="thanks_for_order")
+	 * @Route("/thanks-for-order/{id}", name="thanks_for_order")
 	 *
 	 * @return Response
 	 */
-	public function thankYouAction()
+	public function thankYouAction(Order $order)
 	{
-		return $this->render('cart/thank_you.html.twig');
+		return $this->render('cart/thank_you.html.twig', ['order' => $order]);
 	}
 
 }

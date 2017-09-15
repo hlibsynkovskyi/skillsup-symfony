@@ -14,6 +14,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Order
 {
 
+    const PAYMENT_STATUS_SUCCESS = 1;
+    const PAYMENT_STATUS_FAIL = 2;
+
 	/**
 	 * @var integer
 	 *
@@ -103,6 +106,20 @@ class Order
      * @ Assert\NotBlank()
      */
     protected $warehouse;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $paymentStatus;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $paymentDate;
 
     public function __construct()
     {
@@ -336,4 +353,68 @@ class Order
     {
         return $this->warehouse;
     }
+
+    /**
+     * Set paymentStatus
+     *
+     * @param integer $paymentStatus
+     *
+     * @return Order
+     */
+    public function setPaymentStatus($paymentStatus)
+    {
+        $this->paymentStatus = $paymentStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get paymentStatus
+     *
+     * @return integer
+     */
+    public function getPaymentStatus()
+    {
+        return $this->paymentStatus;
+    }
+
+    /**
+     * Set paymentDate
+     *
+     * @param \DateTime $paymentDate
+     *
+     * @return Order
+     */
+    public function setPaymentDate($paymentDate)
+    {
+        $this->paymentDate = $paymentDate;
+
+        return $this;
+    }
+
+    /**
+     * Get paymentDate
+     *
+     * @return \DateTime
+     */
+    public function getPaymentDate()
+    {
+        return $this->paymentDate;
+    }
+
+    public function paidIsSuccess()
+    {
+        return $this->paymentStatus == self::PAYMENT_STATUS_SUCCESS;
+    }
+
+    public function paidIsFail()
+    {
+        return $this->paymentStatus == self::PAYMENT_STATUS_FAIL;
+    }
+
+    public function paidIsUnknown()
+    {
+        return $this->paymentStatus === null;
+    }
+
 }

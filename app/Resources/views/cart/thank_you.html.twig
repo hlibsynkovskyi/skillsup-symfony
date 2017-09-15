@@ -18,14 +18,14 @@
                     </header>
 
                     <form method="POST" action="https://api.privatbank.ua/p24api/ishop">
-                        <input type="hidden" name="amt" value="500" />
+                        <input type="hidden" name="amt" value="{{ order.cart.cost }}" />
                         <input type="hidden" name="ccy" value="UAH" />
-                        <input type="hidden" name="merchant" value="129904" />
-                        <input type="hidden" name="order" value="12334" />
+                        <input type="hidden" name="merchant" value="{{ privat24_merchant_id }}" />
+                        <input type="hidden" name="order" value="{{ order.id }}" />
                         <input type="hidden" name="details" value="Оплата на сайте test" />
                         <input type="hidden" name="ext_details" value="Описание товара №..." />
                         <input type="hidden" name="pay_way" value="privat24" />
-                        <input type="hidden" name="return_url" value="{{ url('checkout_success') }}" />
+                        <input type="hidden" name="return_url" value="{{ url('checkout_success', {id: order.id}) }}" />
                         <input type="hidden" name="server_url" value="{{ url('checkout_response') }}" />
                         <button type="submit">Оплатить</button>
                     </form>

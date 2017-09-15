@@ -18,4 +18,5 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
     nova_poshta_api_key: ~
-    privat24_merchant: ~
+    privat24_merchant_id: ~
+    privat24_merchant_password: ~

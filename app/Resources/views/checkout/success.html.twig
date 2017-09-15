@@ -1,5 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <i>Спасибо за покупку</i>
+
+    {% if order.paidIsSuccess %}
+        <i>Спасибо за покупку</i>
+    {% endif %}
+
+    {% if order.paidIsFail %}
+        <i>Извините, оплата не успешна. Попробуйте еще раз.</i>
+    {% endif %}
+
+    {% if order.paidIsUnknown %}
+        <i>Подождите, данные об оплате еще в пути. Подождите...</i>
+
+        <script type="text/javascript">
+            setTimeout(function() {location.reload()}, 20000);
+        </script>
+    {% endif %}
+
 {% endblock %}
