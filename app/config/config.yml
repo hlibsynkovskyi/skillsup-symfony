@@ -39,6 +39,7 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
       nova_poshta_api_key: '%nova_poshta_api_key%'
+      privat24_merchant_id: '%privat24_merchant_id%'
 
 # Doctrine Configuration
 doctrine:
