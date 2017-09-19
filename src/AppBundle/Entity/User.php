@@ -32,6 +32,13 @@ class User extends BaseUser
 	 */
 	protected $lastName;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=250)
+     */
+	protected $nickName;
+
 	/**
 	 * @var Cart[]
 	 *
