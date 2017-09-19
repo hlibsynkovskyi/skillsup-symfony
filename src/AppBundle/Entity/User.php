@@ -32,6 +32,13 @@ class User extends BaseUser
 	 */
 	protected $lastName;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=250)
+     */
+	protected $nickName;
+
 	/**
 	 * @var Cart[]
 	 *
@@ -171,5 +178,29 @@ class User extends BaseUser
     public function getOrders()
     {
         return $this->orders;
+    }
+
+    /**
+     * Set nickName
+     *
+     * @param string $nickName
+     *
+     * @return User
+     */
+    public function setNickName($nickName)
+    {
+        $this->nickName = $nickName;
+
+        return $this;
+    }
+
+    /**
+     * Get nickName
+     *
+     * @return string
+     */
+    public function getNickName()
+    {
+        return $this->nickName;
     }
 }

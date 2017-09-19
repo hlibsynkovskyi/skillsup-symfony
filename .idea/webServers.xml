@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="be2c6eed-2c7a-41de-bdce-c13b409088b0" name="babenko.skillsup.itworks-soft.com" url="http://babenko.skillsup.itworks-soft.com">
+        <fileTransfer host="babenko.skillsup.itworks-soft.com" port="21" rootFolder="/web/babenko.skillsup.itworks-soft.com/public_html">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
