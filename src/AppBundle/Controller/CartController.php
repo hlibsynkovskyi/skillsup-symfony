@@ -157,7 +157,7 @@ class CartController extends Controller
         $parameters->CitySender = '8d5a980d-391c-11dd-90d9-001a92567626';
         $parameters->setRecipient = $settlement;
         $parameters->Weight = 10;
-        $parameters->ServiceType = 'Сargo';
+        $parameters->CargoType = 'Сargo';
         $parameters->Cost = $cart->getCost();
         $parameters->SeatsAmount = 1;
         $result = InternetDocument::getDocumentPrice($parameters);

@@ -117,6 +117,12 @@ $(function () {
         });
     });
 
+    $('#order_warehouse').on('change', function(event) {
+        $.get(window.DELIVERY_COST_URL, {'settlement': $(this).val()}, function(result) {
+            debugger;
+        });
+    });
+
     $('.js-quantity-arrow').on('click', function (event) {
         event.preventDefault();
 
