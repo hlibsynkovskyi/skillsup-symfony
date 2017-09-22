@@ -6,6 +6,7 @@ use AppBundle\Entity\CartItem;
 use AppBundle\Entity\Order;
 use AppBundle\Entity\Product;
 use AppBundle\Form\OrderType;
+use NovaPoshta\MethodParameters\MethodParameters;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -148,21 +149,18 @@ class CartController extends Controller
     public function setAddressAction(Request $request)
     {
         $settlement = intval($request->request->get('settlement'));
-        $warehouse = intval($request->request->get('warehouse'));
 
-        $sender = new CounterpartyContact();
-        $sender->setCity('8d5a980d-391c-11dd-90d9-001a92567626');
+        $carts = $this->get('app.carts'); // Получили сервис для работі с корзиной
+        $cart = $carts->getCartFromSession(); //Получили корзину из сессии
 
-        $internetDocument = new InternetDocument();
-        $internetDocument->setSender();
-
-        $this->get('app.carts')->setItemCount($item, $count);
-
-        $result = [
-            'itemCost' => $item->getCost(),
-            'cartCost' => $item->getCart()->getCost(),
-            'cartCount' => $item->getCart()->getCount(),
-        ];
+        $parameters = new MethodParameters();
+        $parameters->CitySender = '8d5a980d-391c-11dd-90d9-001a92567626';
+        $parameters->setRecipient = $settlement;
+        $parameters->Weight = 10;
+        $parameters->ServiceType = 'Сargo';
+        $parameters->Cost = $cart->getCost();
+        $parameters->SeatsAmount = 1;
+        $result = InternetDocument::getDocumentPrice($parameters);
 
         return new JsonResponse($result);
     }
