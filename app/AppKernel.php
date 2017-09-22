@@ -61,9 +61,9 @@ class AppKernel extends Kernel
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
 
-    protected function build(ContainerBuilder $container)
+    protected function initializeContainer()
     {
-        parent::build($container);
+        parent::initializeContainer();
 
         Config::SetApiKey($this->getContainer()->getParameter('nova_poshta_api_key'));
         Config::setFormat(Config::FORMAT_JSONRPC2);

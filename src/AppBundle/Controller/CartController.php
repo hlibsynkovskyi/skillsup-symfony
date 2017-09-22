@@ -6,15 +6,14 @@ use AppBundle\Entity\CartItem;
 use AppBundle\Entity\Order;
 use AppBundle\Entity\Product;
 use AppBundle\Form\OrderType;
-use NovaPoshta\MethodParameters\MethodParameters;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use NovaPoshta\ApiModels\InternetDocument;
-use NovaPoshta\Models\CounterpartyContact;
-use NovaPoshta\Models\;
+use NovaPoshta\ApiModels\Address;
+use NovaPoshta\MethodParameters\MethodParameters;
 
 class CartController extends Controller
 {
@@ -155,7 +154,8 @@ class CartController extends Controller
         $cart = $carts->getCartFromSession(); //Получили корзину из сессии
 
         $parameters = new MethodParameters();
-        $parameters->Ref = $settlement;
+        $parameters->CityRef = $settlement;
+        $result = Address::getSettlements($parameters);
 
         $parameters = new MethodParameters();
         $parameters->CitySender = '8d5a980d-391c-11dd-90d9-001a92567626';
