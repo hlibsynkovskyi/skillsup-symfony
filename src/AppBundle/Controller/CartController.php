@@ -11,6 +11,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use NovaPoshta\ApiModels\InternetDocument;
+use NovaPoshta\Models\CounterpartyContact;
 
 class CartController extends Controller
 {
@@ -124,14 +126,45 @@ class CartController extends Controller
         ]);
     }
 
+	/**
+	 * @Route("/thanks-for-order/{id}", name="thanks_for_order")
+     *
+     * @param Order $order
+	 *
+	 * @return Response
+	 */
+	public function thankYouAction(Order $order)
+	{
+		return $this->render('cart/thank_you.html.twig', ['order' => $order]);
+	}
+
     /**
-     * @Route("thanks-for-order/{id}", name="thanks_for_order")
+     * @Route("/set-order-address", name="set_order_address")
+     *
+     * @param Request  $request
      *
      * @return Response
      */
-    public function  thankYouAction(Order $order)
+    public function setAddressAction(Request $request)
     {
-        return $this->render('cart/thank_you.html.twig', ['order' => $order]);
+        $settlement = intval($request->request->get('settlement'));
+        $warehouse = intval($request->request->get('warehouse'));
+
+        $sender = new CounterpartyContact();
+        $sender->setCity('8d5a980d-391c-11dd-90d9-001a92567626');
+
+        $internetDocument = new InternetDocument();
+        $internetDocument->setSender();
+
+        $this->get('app.carts')->setItemCount($item, $count);
+
+        $result = [
+            'itemCost' => $item->getCost(),
+            'cartCost' => $item->getCart()->getCost(),
+            'cartCount' => $item->getCart()->getCount(),
+        ];
+
+        return new JsonResponse($result);
     }
 
 }

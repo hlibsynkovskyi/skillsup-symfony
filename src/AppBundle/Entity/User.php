@@ -179,4 +179,28 @@ class User extends BaseUser
     {
         return $this->orders;
     }
+
+    /**
+     * Set nickName
+     *
+     * @param string $nickName
+     *
+     * @return User
+     */
+    public function setNickName($nickName)
+    {
+        $this->nickName = $nickName;
+
+        return $this;
+    }
+
+    /**
+     * Get nickName
+     *
+     * @return string
+     */
+    public function getNickName()
+    {
+        return $this->nickName;
+    }
 }

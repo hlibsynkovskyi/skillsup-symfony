@@ -53,8 +53,8 @@
                                     <td>
                                         <div class="custom-quantity-input">
                                             <input type="text" name="quantity" class="js-item-count" data-update-url="{{ path('set_item_count', {'id': item.id}) }}" data-original-value="{{ item.count }}" value="{{ item.count }}">
-                                            <a href="#" onclick="return false;" class="quantity-btn quantity-input-up"><i class="fa fa-angle-up"></i></a>
-                                            <a href="#" onclick="return false;" class="quantity-btn quantity-input-down"><i class="fa fa-angle-down"></i></a>
+                                            <a href="#" class="quantity-btn quantity-input-up js-quantity-arrow" data-step="1"><i class="fa fa-angle-up"></i></a>
+                                            <a href="#" class="quantity-btn quantity-input-down js-quantity-arrow" data-step="-1"><i class="fa fa-angle-down"></i></a>
                                         </div>
                                     </td>
                                     <td class="item-total-col"><span class="item-price-special js-item-cost">{{ item.cost }}</span>
@@ -128,7 +128,7 @@
                                     </div><!-- End .tab-pane -->
 
                                     <div class="tab-pane" id="discount">
-                                        <p>Enter your discount coupon code here.</p>
+                                        <p>Введите код купона для скидки.</p>
                                         <form action="#">
                                             <div class="input-group">
                                                 <input type="text" required class="form-control" placeholder="Coupon code">
@@ -176,19 +176,29 @@
                     <div class="md-margin2x"></div><!-- Space -->
 
                     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-                    <table>
-                        {% for field in ['firstName', 'lastName', 'phone', 'email', 'settlement', 'warehouse'] %}
-                        <tr>
-                            <td>{{ form_label(form[field]) }}</td>
-                            <td>
-                                {{ form_widget(form[field]) }}
-                                {{ form_errors(form[field]) }}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </table>
+                        <table>
+                            {% for field in ['firstName', 'lastName', 'phone', 'email'] %}
+                                <tr>
+                                    <td>{{ form_label(form[field]) }}</td>
+                                    <td>
+                                        {{ form_widget(form[field]) }}
+                                        {{ form_errors(form[field]) }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            {% for field in [ 'settlement', 'warehouse'] %}
+                                <tr>
+                                    <td>{{ form_label(form[field]) }}</td>
+                                    <td>
+                                        <select id="{{form[field].vars.id }}" name="{{ form[field].vars.full_name }}"></select>
+                                        {{ form_errors(form[field]) }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
                         <input type="submit" value="Подтвердить заказ">
-                    {{ form_end(form) }}
+                        {{ form_widget(form._token) }}
+                    {{ form_end(form, {'render_rest': false}) }}
 
                 </div><!-- End .col-md-12 -->
             </div><!-- End .row -->

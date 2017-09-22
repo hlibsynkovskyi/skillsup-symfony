@@ -14,17 +14,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Order
 {
 
-    const PAYMENT_STATUS_SUCCESS = 1;
-    const PAYMENT_STATUS_FAIL = 2;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+	const PAYMENT_STATUS_SUCCESS = 1;
+    const PAYMENT_STATUS_FAIL = 2;/**
+	 * @var integer
+	 *
+	 * @ORM\Id
+	 * @ORM\Column(type="integer")
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	protected $id;
 
     /**
      * @var Cart
@@ -408,7 +406,7 @@ class Order
         return $this->paymentStatus == self::PAYMENT_STATUS_SUCCESS;
     }
 
-    public function paidIfFail()
+    public function paidIsFail()
     {
         return $this->paymentStatus == self::PAYMENT_STATUS_FAIL;
     }
