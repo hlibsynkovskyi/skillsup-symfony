@@ -94,7 +94,7 @@ class Order
      *
      * @ORM\Column(type="string", length=36)
      *
-     * @ Assert\NotBlank()
+     * @Assert\NotBlank()
      */
 	protected $settlement;
 
@@ -103,7 +103,7 @@ class Order
      *
      * @ORM\Column(type="string", length=36)
      *
-     * @ Assert\NotBlank()
+     * @Assert\NotBlank()
      */
     protected $warehouse;
 

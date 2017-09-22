@@ -11,6 +11,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use NovaPoshta\ApiModels\InternetDocument;
+use NovaPoshta\Models\CounterpartyContact;
 
 class CartController extends Controller
 {
@@ -135,5 +137,34 @@ class CartController extends Controller
 	{
 		return $this->render('cart/thank_you.html.twig', ['order' => $order]);
 	}
+
+    /**
+     * @Route("/set-order-address", name="set_order_address")
+     *
+     * @param Request  $request
+     *
+     * @return Response
+     */
+    public function setAddressAction(Request $request)
+    {
+        $settlement = intval($request->request->get('settlement'));
+        $warehouse = intval($request->request->get('warehouse'));
+
+        $sender = new CounterpartyContact();
+        $sender->setCity('8d5a980d-391c-11dd-90d9-001a92567626');
+
+        $internetDocument = new InternetDocument();
+        $internetDocument->setSender();
+
+        $this->get('app.carts')->setItemCount($item, $count);
+
+        $result = [
+            'itemCost' => $item->getCost(),
+            'cartCost' => $item->getCart()->getCost(),
+            'cartCount' => $item->getCart()->getCount(),
+        ];
+
+        return new JsonResponse($result);
+    }
 
 }

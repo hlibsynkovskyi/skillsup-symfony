@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3a699ba9cf47a942dfb580743e47d35b",
-    "content-hash": "a97447c8f882594307bcc534853c0f22",
+    "hash": "22a85aa9e7d5728591df1356b49f625d",
+    "content-hash": "9014a6528775ab65766cc46358f10cce",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -1982,6 +1982,51 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2017-03-31 14:50:32"
+        },
+        {
+            "name": "serj1chen/nova-poshta-sdk-php",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/serj1chen/nova-poshta-sdk-php.git",
+                "reference": "5927c1613fef0b9ec1d227172c7ca980daa157f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/serj1chen/nova-poshta-sdk-php/zipball/5927c1613fef0b9ec1d227172c7ca980daa157f3",
+                "reference": "5927c1613fef0b9ec1d227172c7ca980daa157f3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/NovaPoshta/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chenakal Sergii",
+                    "email": "s.chenakal@gmail.com",
+                    "homepage": "https://github.com/serj1chen"
+                }
+            ],
+            "description": "SDK для Новой Почты",
+            "keywords": [
+                "api",
+                "novaposhta",
+                "php",
+                "sdk"
+            ],
+            "time": "2017-02-05 00:09:26"
         },
         {
             "name": "sonata-project/admin-bundle",
