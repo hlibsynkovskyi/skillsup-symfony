@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use NovaPoshta\ApiModels\InternetDocument;
 use NovaPoshta\Models\CounterpartyContact;
+use NovaPoshta\Models\;
 
 class CartController extends Controller
 {
@@ -152,6 +153,9 @@ class CartController extends Controller
 
         $carts = $this->get('app.carts'); // Получили сервис для работі с корзиной
         $cart = $carts->getCartFromSession(); //Получили корзину из сессии
+
+        $parameters = new MethodParameters();
+        $parameters->Ref = $settlement;
 
         $parameters = new MethodParameters();
         $parameters->CitySender = '8d5a980d-391c-11dd-90d9-001a92567626';

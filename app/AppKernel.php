@@ -1,7 +1,9 @@
 <?php
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use NovaPoshta\Config;
 
 class AppKernel extends Kernel
 {
@@ -58,4 +60,14 @@ class AppKernel extends Kernel
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
+
+    protected function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        Config::SetApiKey($this->getContainer()->getParameter('nova_poshta_api_key'));
+        Config::setFormat(Config::FORMAT_JSONRPC2);
+        Config::setLanguage(Config::LANGUAGE_UA);
+    }
+
 }
