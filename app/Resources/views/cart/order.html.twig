@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
-    {% block body %}
 
+{% block body %}
     <section id="content">
         <div id="breadcrumb-container">
             <div class="container">
@@ -206,4 +206,7 @@
 
     </section><!-- End #content -->
 
-    {% endblock %}
+    <script type="text/javascript">
+        window.DELIVERY_COST_URL = '{{ path('set_order_address') }}'; // Записываем в св-во DELIVERY_COST_URL окна браузера адрес для определения стоимости доставки
+    </script>
+{% endblock %}

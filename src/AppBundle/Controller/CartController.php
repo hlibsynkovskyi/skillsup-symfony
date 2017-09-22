@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use NovaPoshta\ApiModels\InternetDocument;
 use NovaPoshta\Models\CounterpartyContact;
+use NovaPoshta\MethodParameters\MethodParameters;
 
 class CartController extends Controller
 {
@@ -148,21 +149,18 @@ class CartController extends Controller
     public function setAddressAction(Request $request)
     {
         $settlement = intval($request->request->get('settlement'));
-        $warehouse = intval($request->request->get('warehouse'));
 
-        $sender = new CounterpartyContact();
-        $sender->setCity('8d5a980d-391c-11dd-90d9-001a92567626');
+        $carts = $this->get('app.carts'); // Получили сервис для работы с корзиной
+        $cart = $carts->getCartFromSession(); // Получили корзину из сессии
 
-        $internetDocument = new InternetDocument();
-        $internetDocument->setSender();
-
-        $this->get('app.carts')->setItemCount($item, $count);
-
-        $result = [
-            'itemCost' => $item->getCost(),
-            'cartCost' => $item->getCart()->getCost(),
-            'cartCount' => $item->getCart()->getCount(),
-        ];
+        $parameters = new MethodParameters();  // Создаем класс для передачи параметров новой почте.
+        $parameters->CitySender = 'db5c88f0-391c-11dd-90d9-001a92567626';
+        $parameters->CityRecipient = $settlement;
+        $parameters->Weight = 10;
+        $parameters->ServiceType = 'Cargo';
+        $parameters->Cost = $cart->getCost();
+        $parameters->SeatsAmount = 1;
+        $result = InternetDocument::getDocumentPrice($parameters);
 
         return new JsonResponse($result);
     }
